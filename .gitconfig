@@ -1,0 +1,12 @@
+[credential]
+	helper = manager
+[user]
+	name = Casuor
+	email = 1833708553@qq.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	autocrlf = true

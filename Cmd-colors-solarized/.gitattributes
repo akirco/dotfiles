@@ -1,0 +1,4 @@
+# For this project
+*.ps1   text eol=crlf
+*.reg   text eol=crlf
+*.sh    text eol=lf
