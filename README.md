@@ -1,37 +1,272 @@
-## Welcome to GitHub Pages
+Say goodbye to yesterday.
 
-You can use the [editor on GitHub](https://github.com/Casuor/ConfigFSX/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Say hello to tomorrow.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Remember you can be better.
 
-### Markdown
+Be yourself and do yourself.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Year by year, day by day.
 
-```markdown
-Syntax highlighted code block
+Enhance yourself to meet challenges.
 
-# Header 1
-## Header 2
-### Header 3
+## Scoop install
+```
+#修改hosts
+#github
+140.82.114.3 github.com
+185.199.110.153  assets-cdn.github.com
+199.232.69.194 github.global.ssl.fastly.net
+199.232.68.133 raw.githubusercontent.com
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+$env:SCOOP='D:\Scoop'
+[Environment]::SetEnvironmentVariable('SCOOP', $env:SCOOP, 'User')
+$env:SCOOP_GLOBAL='D:\GlobalScoopApps'
+[Environment]::SetEnvironmentVariable('SCOOP_GLOBAL', $env:SCOOP_GLOBAL, 'Machine') #此步骤管理员运行
+Invoke-Expression (New-Object 
+#确保raw.githubusercontent.com可以访问
+System.Net.WebClient).DownloadString('https://get.scoop.sh')
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+```
+scoop install sudo -g
+#ssr代理
+scoop config proxy 127.0.0.1:1080
+#scoop config rm proxy
+scoop install aria2 #喵的死活下不动
+scoop install git
+scoop update
+Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
+scoop install innounp
+scoop install dark
+scoop checkup
+scoop bucket add extras
+scoop install typora
+scoop install vscode
+code  $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 
-### Jekyll Themes
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Casuor/ConfigFSX/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```powershell
+scoop install figlet
+scoop install cowsay
+scoop bucket add dorado https://github.com/h404bi/dorado
+sudo scoop install trash -g
+sudo scoop install nvm -g
+scoop bucket add Ash258 'https://github.com/Ash258/Scoop-Ash258.git'
+scoop install carnac
+scoop bucket add iszy 'https://github.com/ZvonimirSun/scoop-iszy.git'
+scoop install wechat
+scoop install qq-dreamcast
+scoop install utools
+scoop install switchhosts
+scoop install scoop bucket add my-scoop-bucket https://github.com/destinyenvoy/my-scoop-bucket
+scoop install gvim
+#设置别名
+scoop alias add i 'scoop install $args[0]'
+scoop alias add rm 'scoop uninstall $args[0]'
+scoop alias add ls 'scoop list' 'List installed apps'
+scoop alias add up 'scoop update $args[0]' 'Update apps, or Scoop itself'
+```
+## windows terminal
+### installation
+```powershell
+Install-Module posh-git -Scope CurrentUser
+Install-Module oh-my-posh -Scope CurrentUser
+$profile
+cd C:\Users\16877\Documents\WindowsPowerShell\
+ls
+New-Item "Microsoft.PowerShell_profile.ps1" -type file
+code Microsoft.PowerShell_profile.ps1
+Import-Module posh-git
+Import-Module oh-my-posh
+Set-Theme Paradox
+```
+### color scheme
+| Property              | Necessity  | Type   | Description                                              | chinese        | customize  |
+| --------------------- | ---------- | ------ | -------------------------------------------------------- | -------------- | ---------- |
+| `name`                | *Required* | String | Name of the color scheme.                                | 名称           | casuordark |
+| `foreground`          | *Required* | String | Sets the foreground color of the color scheme.           | 前景色         | #008080    |
+| `background`          | *Required* | String | Sets the background color of the color scheme.           | 背景色         | #002B36    |
+| `selectionBackground` | Optional   | String | Sets the selection background color of the color scheme. | 选择后的背景色 | #93A1A1    |
+| `cursorColor`         | Optional   | String | Sets the cursor color of the color scheme.               | 光标的颜色     | #FF5F56    |
+| `black`               | *Required* | String | Sets the color used as ANSI black.                       |                | #002731    |
+| `blue`                | *Required* | String | Sets the color used as ANSI blue.                        |                | #21A3F1    |
+| `brightBlack`         | *Required* | String | Sets the color used as ANSI bright black.                |                | #111111    |
+| `brightBlue`          | *Required* | String | Sets the color used as ANSI bright blue.                 |                | #31C3C1    |
+| `brightCyan`          | *Required* | String | Sets the color used as ANSI bright cyan.                 |                | #00FFFF    |
+| `brightGreen`         | *Required* | String | Sets the color used as ANSI bright green.                |                | #00FFCC    |
+| `brightPurple`        | *Required* | String | Sets the color used as ANSI bright purple.               |                | #EE82EE    |
+| `brightRed`           | *Required* | String | Sets the color used as ANSI bright red.                  |                | #FF5F56    |
+| `brightWhite`         | *Required* | String | Sets the color used as ANSI bright white.                |                | #F5F5F5    |
+| `brightYellow`        | *Required* | String | Sets the color used as ANSI bright yellow.               |                | #FFBD2E    |
+| `cyan`                | *Required* | String | Sets the color used as ANSI cyan.                        |                | #00A6CC    |
+| `green`               | *Required* | String | Sets the color used as ANSI green.                       |                | #05E177    |
+| `purple`              | *Required* | String | Sets the color used as ANSI purple.                      |                | #B57EDC    |
+| `red`                 | *Required* | String | Sets the color used as ANSI red.                         |                | #EB4B3D    |
+| `white`               | *Required* | String | Sets the color used as ANSI white.                       |                | #F9F6F6    |
+| `yellow`              | *Required* | String | Sets the color used as ANSI yellow.                      |                | #EDC87D    |
 
-### Support or Contact
+```json
+//仿制Solarized (Dark)  
+{
+            "name": "CasuorDark",
+            "black": "#002731",
+            "red": "#EB4B3D",
+            "green": "#05E177",
+            "yellow": "#EDC87D",
+            "blue": "#1498eb",
+            "purple": "#B57EDC",
+            "cyan": "#25c5b8",
+            "white": "#9DA4B0",
+            "brightBlack": "#CCCCCC",
+            "brightRed": "#FF5F56",
+            "brightGreen": "#788E05",
+            "brightYellow": "#FFBD2E",
+            "brightBlue": "#00BBFF",
+            "brightPurple": "#EE82EE",
+            "brightCyan": "#00FFFF",
+            "brightWhite": "#C2616A",
+            "background": "#00313f",
+            "foreground": "#008080",
+            "selectionBackground": "#93A1A1",
+            "cursorColor": "#FF5F56"
+  }
+```
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```json
+// This file was initially generated by Windows Terminal 0.11.1333.0
+// It should still be usable in newer versions, but newer versions might have additional
+// settings, help text, or changes that you will not see unless you clear this file
+// and let us generate a new one for you.
+
+// To view the default settings, hold "alt" while clicking on the "Settings" button.
+// For documentation on these settings, see: https://aka.ms/terminal-documentation
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+
+    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+
+    // You can add more global application settings here.
+    // To learn more about global settings, visit https://aka.ms/terminal-global-settings
+
+    // If enabled, selections are automatically copied to your clipboard.
+    "copyOnSelect": false,
+
+    // If enabled, formatted data is also copied to your clipboard
+    "copyFormatting": false,
+    "initialCols" : 100,
+    "initialRows" : 30,
+    // A profile specifies a command to execute paired with information about how it should look and feel.
+    // Each one of them will appear in the 'New Tab' dropdown,
+    //   and can be invoked from the commandline with `wt.exe -p xxx`
+    // To learn more about profiles, visit https://aka.ms/terminal-profile-settings
+    "profiles":
+    {
+        "defaults":
+        {
+            // Put settings here that you want to apply to all profiles.
+
+        },
+        "list":
+        [
+            {
+                // Make changes here to the powershell.exe profile.
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "name": "Windows PowerShell",
+                "commandline": "powershell.exe",
+                "hidden": false,
+                "fontFace" : "Hack",
+                "fontSize" : 10,
+                "cursorShape" : "filledBox",
+                "useAcrylic": true,
+                "acrylicOpacity" : 0.5,
+                "colorScheme" : "CasuorDark",
+                "backgroundImage": "E:/OneDrive/Pictures/terminal/win.jpg",
+                "backgroundImageOpacity": 0.1
+            },
+            {
+                // Make changes here to the cmd.exe profile.
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "name": "命令提示符",
+                "commandline": "cmd.exe",
+                "hidden": false
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "name" : "Git Bash",
+                "commandline" : "D:/Scoop/apps/git/current/bin/bash.exe -li",
+                "icon" : "D:/Scoop/apps/git/current/mingw64/share/git/git-for-windows.ico",
+                "startingDirectory" : "%USERPROFILE%",
+                "hidden": false,
+                "fontFace" : "Hack",
+                "fontSize" : 10,
+                "cursorColor" : "#FFF55F",
+                "cursorShape" : "bar",
+                "useAcrylic": true,
+                "acrylicOpacity" : 0.1,
+                "colorScheme" : "CasuorDark"
+            }
+        ]
+    },
+
+    // Add custom color schemes to this array.
+    // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
+    "schemes": 
+    [
+    
+        {
+            "name": "CasuorDark",
+            "black": "#002731",
+            "red": "#EB4B3D",
+            "green": "#05E177",
+            "yellow": "#EDC87D",
+            "blue": "#1498eb",
+            "purple": "#B57EDC",
+            "cyan": "#25c5b8",
+            "white": "#9DA4B0",
+            "brightBlack": "#CCCCCC",
+            "brightRed": "#FF5F56",
+            "brightGreen": "#788E05",
+            "brightYellow": "#FFBD2E",
+            "brightBlue": "#00BBFF",
+            "brightPurple": "#EE82EE",
+            "brightCyan": "#00FFFF",
+            "brightWhite": "#C2616A",
+            "background": "#00313f",
+            "foreground": "#008080",
+            "selectionBackground": "#93A1A1",
+            "cursorColor": "#FF5F56"
+          }
+         
+    ],
+
+    // Add custom keybindings to this array.
+    // To unbind a key combination from your defaults.json, set the command to "unbound".
+    // To learn more about keybindings, visit https://aka.ms/terminal-keybindings
+    "keybindings":
+    [
+        // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
+        // These two lines additionally bind them to Ctrl+C and Ctrl+V.
+        // To learn more about selection, visit https://aka.ms/terminal-selection
+        { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
+        { "command": "paste", "keys": "ctrl+v" },
+
+        // Press Ctrl+Shift+F to open the search box
+        { "command": "find", "keys": "ctrl+shift+f" },
+
+        // Press Alt+Shift+D to open a new pane.
+        // - "split": "auto" makes this pane open in the direction that provides the most surface area.
+        // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
+        // To learn more about panes, visit https://aka.ms/terminal-panes
+        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" }
+    ]
+}
+
+```
