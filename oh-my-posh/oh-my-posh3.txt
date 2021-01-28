@@ -1,0 +1,39 @@
+Directory: 
+C:\Users\Canary\Documents\Oh-my-posh3
+卷 Canary 的文件夹 PATH 列表
+卷序列号为 26E4-3B23
+C:.
+│  oh-my-posh.exe
+│  oh-my-posh3.txt
+│  wt.jpg
+│  wt1.jpg
+│  wt2.jpg
+│  wt3.jpg
+│  wt4.jpg
+│  
+└─poshthemes
+        agnoster.omp.json
+        agnosterplus.omp.json
+        aliens.omp.json
+        avit.omp.json
+        darkblood.omp.json
+        emodipt.omp.json
+        fish.omp.json
+        honukai.omp.json
+        jandedobbeleer.omp.json
+        lambda.omp.json
+        material.omp.json
+        myself.omp.json
+        negligible.omp.json
+        paradox.omp.json
+        pararussel.omp.json
+        powerlevel10k_classic.omp.json
+        powerlevel10k_lean.omp.json
+        powerline.omp.json
+        robbyrussel.omp.json
+        schema.json
+        slim.omp.json
+        sorin.omp.json
+        star.omp.json
+        zash.omp.json
+        
