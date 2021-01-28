@@ -270,3 +270,170 @@ Set-Theme Paradox
 }
 
 ```
+## oh-my-posh3
+### install
+```powershell
+Install-Module oh-my-posh -Scope CurrentUser -AllowPrerelease
+
+Get-PoshThemes
+
+oh-my-posh --print-shell
+
+$PROFILE
+
+Invoke-Expression (oh-my-posh --init --shell pwsh --config "$(scoop prefix oh-my-posh)/themes/jandedobbeleer.omp.json")
+
+. $profile
+```
+### myself.omp.json
+```json
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh3/main/themes/schema.json",
+    "blocks": [
+      {
+        "type": "prompt",
+        "alignment": "left",
+        "segments": [
+        // {
+        //   "type": "text",
+        //   "style": "plain",
+        //   "foreground": "#ffffff",
+        //   "properties": {
+        //     "prefix": "",
+        //     "text": "<#C591E8>\u276F</><#69FF94>\u276F</>"
+        //   }
+        // },
+        {
+          "type": "os",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#f35325",
+          "properties": {
+            "alpine": "\uf300",
+            "arch": "\uf303",
+            "centos": "\uf304",
+            "debian": "\uf306",
+            "elementary": "\uf309",
+            "fedora": "\uf30a",
+            "gentoo": "\uf30d",
+            "linux": "\ue712",
+            "macos": "\ue711",
+            "manjaro": "\uf312",
+            "mint": "\uf30f",
+            "opensuse": "\uf314",
+            "raspbian": "\uf315",
+            "ubuntu": "\uf31c",
+            "wsl": "\ue712",
+            "wsl_separator": " on ",
+            "windows": "\ue70f"
+          }
+        },
+          {
+            "type": "time",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#5a4cab",
+            "background": "#ffba08",
+            "properties": {
+              "time_format": "15:04:05",
+              "postfix": " \uF017 "
+            }
+          },
+          {
+            "type": "path",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#ffffff",
+            "background": "#FF479C",
+            "properties": {
+              "prefix": " \uE5FF ",
+              "home_icon": "\uF7DB",
+              "folder_icon": "\uF115",
+              "folder_separator_icon": " \uE0B0 ",
+              "style": "agnoster"
+            }
+          },
+          {
+            "type": "git",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#193549",
+            "background": "#fffb38",
+            "properties": {
+              "display_stash_count": true,
+              "display_upstream_icon": true
+            }
+          },
+          {
+            "type": "battery",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#193549",
+            "background": "#F36943",
+            "properties": {
+              "battery_icon": "",
+              "charged_icon": "\uE22F ",
+              "charging_icon": "\uE234 ",
+              "discharging_icon": "\uE231 ",
+              "color_background": true,
+              "charged_color": "#4caf50",
+              "charging_color": "#FF479C",
+              "discharging_color": "#ff5722",
+              "postfix": "\uF295 ",
+              "display_charging": true
+            }
+          },
+          {
+            "type": "node",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#ffffff",
+            "background": "#6CA35E",
+            "properties": {
+              "prefix": " \uE718 "
+            }
+          },
+          {
+            "type": "shell",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#ffffff",
+            "background": "#0077c2",
+            "properties": {
+              "prefix": " \uFCB5 "
+            }
+          },
+          {
+            "type": "root",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#193549",
+            "background": "#ffff66"
+          },
+          {
+            "type": "exit",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#ffffff",
+            "background": "#ff8080"
+          }
+        ]
+      }
+    ],
+    "final_space": true
+  }
+  
+```
+
+### powershell_profile
+```ps1
+Invoke-Expression (oh-my-posh --init --shell pwsh --config ~/Documents/Oh-my-posh3/poshthemes/myself.omp.json)
+# Import-Module posh-git
+# Import-Module oh-my-posh
+# Set-Theme Avit
+Import-Module PackageManagement
+Import-Module PowerShellGet
+Import-Module PSReadline
+Import-Module "$($(Get-Item $(Get-Command scoop).Path).Directory.Parent.FullName)\modules\scoop-completion"
+```
