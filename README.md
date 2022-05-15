@@ -428,12 +428,36 @@ Invoke-Expression (oh-my-posh --init --shell pwsh --config "$(scoop prefix oh-my
 
 ### powershell_profile
 ```ps1
-Invoke-Expression (oh-my-posh --init --shell pwsh --config ~/Documents/Oh-my-posh3/poshthemes/myself.omp.json)
-# Import-Module posh-git
-# Import-Module oh-my-posh
-# Set-Theme Avit
-Import-Module PackageManagement
-Import-Module PowerShellGet
-Import-Module PSReadline
-Import-Module "$($(Get-Item $(Get-Command scoop).Path).Directory.Parent.FullName)\modules\scoop-completion"
+
+# initial oh-my-posh themes
+   oh-my-posh --init --shell pwsh --config "$(scoop prefix oh-my-posh)\themes\negligible.omp.json" | Invoke-Expression
+ #  oh-my-posh --init --shell pwsh --config "$(scoop prefix oh-my-posh)\themes\di4am0nd.omp.json" | Invoke-Expression
+ #  oh-my-posh --init --shell pwsh --config "$(scoop prefix oh-my-posh)\themes\peru.omp.json" | Invoke-Expression
+ # initial scoop auto complete
+ Import-Module "$($(Get-Item $(Get-Command scoop).Path).Directory.Parent.FullName)\modules\scoop-completion"
+ 
+ # initial terminal icons
+ Import-Module Terminal-Icons
+ 
+ # set-alias
+ Set-Alias ll ls
+ 
+ Set-Alias sco scoop
+ 
+ Set-Alias c cls
+ 
+ Set-Alias k kate
+ 
+ Set-Alias t trash
+ 
+#  Set-Alias rm trash
+ 
+ #alias function
+ function pscoop {start -FilePath 'F:\OS Scoop'}
+
+ function otmp {start -FilePath 'C:\Users\Canary\AppData\Local'}
+
+ # extras
+ Enable-PoshTooltips
+ Enable-PoshTransientPrompt
 ```
