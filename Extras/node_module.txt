@@ -1,0 +1,30 @@
+E:\DevTools\Node.js\NpmMoudles
++-- @aki/fpm@0.1.0 -> .\..\..\..\DevProjects\WebStormProjects\fpm
++-- @quasar/cli@1.3.2
++-- @tarojs/cli@3.4.14
++-- @vue/cli@5.0.8
++-- corepack@0.12.0
++-- dpt@0.0.0 -> .\..\..\..\DevProjects\WebStormProjects\dpt
++-- express-generator@4.16.1
++-- generator-cliify@1.0.5
++-- generator-jhipster@7.8.1
++-- generator-node-cli-commander@0.0.5
++-- generator-node@2.8.0
++-- generator-vue3-admin-cli@1.0.6
++-- generator-webapp@4.0.0-8
++-- hexo@6.2.0
++-- kbone-cli@0.3.5
++-- kpt@0.1.0 -> .\..\..\..\DevProjects\WebStormProjects\ktp\kpt
++-- node-gyp@9.1.0
++-- nodemon@2.0.19
++-- npkill@0.8.3
++-- nrm@1.2.5
++-- picgo@1.5.0-alpha.0
++-- pkg@5.8.0
++-- pm2@5.2.0
++-- serve@14.0.1
++-- ts-node@10.9.1
++-- typescript@4.7.4
++-- windows-build-tools@5.2.2
+`-- yo@4.3.0
+
