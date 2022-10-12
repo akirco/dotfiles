@@ -7,6 +7,9 @@
  # scoop search 
  Invoke-Expression (&scoop-search --hook)
  
+ # docker 
+ Import-Module posh-docker
+
  # initial terminal icons
  Import-Module Terminal-Icons
  
