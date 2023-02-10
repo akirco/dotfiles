@@ -1,0 +1,148 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">GuiCompletion</S>
+      <Version N="Version">0.11.1</Version>
+      <S N="Type">Module</S>
+      <S N="Description">GUI-style tab-completion menu for PowerShell.</S>
+      <Obj N="Author" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>Roman Kuzmin</S>
+          <S>Andrew Bradley</S>
+        </LST>
+      </Obj>
+      <Obj N="CompanyName" RefId="2">
+        <TNRef RefId="1" />
+        <LST>
+          <S>nightroman</S>
+          <S>cspotcode</S>
+        </LST>
+      </Obj>
+      <S N="Copyright">(c) Roman Kuzmin, Andrew Bradley</S>
+      <DT N="PublishedDate">2021-12-21T01:47:58+08:00</DT>
+      <Obj N="InstalledDate" RefId="3">
+        <DT>2022-08-14T12:07:55.3058026+08:00</DT>
+        <MS>
+          <Obj N="DisplayHint" RefId="4">
+            <TN RefId="2">
+              <T>Microsoft.PowerShell.Commands.DisplayHintType</T>
+              <T>System.Enum</T>
+              <T>System.ValueType</T>
+              <T>System.Object</T>
+            </TN>
+            <ToString>DateTime</ToString>
+            <I32>2</I32>
+          </Obj>
+        </MS>
+      </Obj>
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/nightroman/PS-GuiCompletion/blob/main/LICENSE</URI>
+      <URI N="ProjectUri">https://github.com/nightroman/PS-GuiCompletion</URI>
+      <Nil N="IconUri" />
+      <Obj N="Tags" RefId="5">
+        <TNRef RefId="1" />
+        <LST>
+          <S>TabExpansion</S>
+          <S>PSReadLine</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="6">
+        <TN RefId="3">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Obj N="Value" RefId="7">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="7" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Obj N="Value" RefId="8">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Install-GuiCompletion</S>
+                <S>Invoke-GuiCompletion</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Ref N="Value" RefId="7" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="9">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Install-GuiCompletion</S>
+                <S>Invoke-GuiCompletion</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="7" />
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes">https://github.com/nightroman/PS-GuiCompletion/blob/main/Release-Notes.md</S>
+      <Obj N="Dependencies" RefId="10">
+        <TNRef RefId="1" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="11">
+        <TN RefId="4">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">(c) Roman Kuzmin, Andrew Bradley</S>
+          <S N="description">GUI-style tab-completion menu for PowerShell.</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes">https://github.com/nightroman/PS-GuiCompletion/blob/main/Release-Notes.md</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">True</S>
+          <S N="versionDownloadCount">320</S>
+          <S N="downloadCount">2402</S>
+          <S N="packageSize">9692</S>
+          <S N="published">2021/12/21 1:47:58 +08:00</S>
+          <S N="created">2021/12/21 1:47:58 +08:00</S>
+          <S N="lastUpdated">2022/8/14 0:47:35 +08:00</S>
+          <S N="tags">TabExpansion PSReadLine PSModule PSFunction_Install-GuiCompletion PSCommand_Install-GuiCompletion PSFunction_Invoke-GuiCompletion PSCommand_Invoke-GuiCompletion PSIncludes_Function</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2022-08-14T00:47:35Z</S>
+          <S N="NormalizedVersion">0.11.1</S>
+          <S N="Authors">Roman Kuzmin,Andrew Bradley</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">GuiCompletion.nuspec|GuiCompletion.psd1|GuiCompletion.psm1|LICENSE|README.md|scripts\ConsoleLib.ps1|scripts\GuiCompletionConfig.ps1</S>
+          <S N="GUID">ad14a77f-27b3-4c8e-a54e-d603b15adcb8</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\Users\Canary\Documents\PowerShell\Modules\GuiCompletion\0.11.1</S>
+    </MS>
+  </Obj>
+</Objs>
