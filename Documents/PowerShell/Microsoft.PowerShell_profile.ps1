@@ -39,12 +39,14 @@ function localdata {Start-Process -FilePath $env:userprofile\appdata\Local}
 function canary { Start-Process -FilePath $env:userprofile }
 # git
 function gia { git add . }
-function gim {git commit -m $args}
-function gill {git pull}
-function gish {git push origin $args}
+function gim { git commit -m $args }
+function gill { git pull }
+function gish { git push origin $args }
 
 function lsd{Get-ChildItem -Filter .* -Path $args }
 function lsf{Get-ChildItem -Recurse . -Include *.$args}
+function ghash{Get-FileHash -Path $args | Format-Table}
+
 
 
  #set init dim
