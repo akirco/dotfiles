@@ -40,9 +40,10 @@ iwr -useb 'https://raw.githubusercontent.com/scoopinstaller/install/master/insta
 
 ```powershell
 scoop alias add i 'scoop install $args[0]' "install app"
+scoop alias add s 'scoop search $args[0]' "search app"
 scoop alias add ls 'scoop list' 'List installed apps'
 scoop alias add rm 'scoop uninstall $args[0]' "uninstall app"
-scoop alias add up 'scoop update $args[0]' "Update app or Scoop itself"
+scoop alias add up 'scoop update $args[0]' "update app or itself"
 scoop alias add rma 'scoop cleanup *' "remove old version"
 scoop alias add rmc 'scoop cache rm *' "remove dowloaded file"
 ```
@@ -51,10 +52,11 @@ scoop alias add rmc 'scoop cache rm *' "remove dowloaded file"
 
 ```powershell
 scoop bucket add aki 'https://github.com/akirco/aki-apps.git'
-
-scoop i git devsidecar
-scoop i oh-my-posh
 ```
+
+- app backup
+
+> scoop import  [apps.json](https://github.com/akirco/dotfiles/blob/master/apps.json)
 
 ## terminal settings
 
@@ -68,96 +70,114 @@ scoop i oh-my-posh
 
   - scoop-completion
   - scoop-search
+  - npm-completion
   - Terminal-Icons
-  - PSReadline
+  - PSReadline(`already existed`)
   - z
-  - Pester
-
+  - Pester(`already existed`)
 - $profile 
 
 ```powershell
+# open profile
+code $PROFILE.AllUsersCurrentHost
+```
+
+```powershell
 #Microsoft.PowerShell_profile.ps1
- # initial oh-my-posh themes
- oh-my-posh --init --shell pwsh --config "$(scoop prefix oh-my-posh)\themes\negligible.omp.json" | Invoke-Expression
- # initial scoop auto complete
- Import-Module "$($(Get-Item $(Get-Command scoop).Path).Directory.Parent.FullName)\modules\scoop-completion"
+# https://learn.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.3
 
- # scoop search
- # Invoke-Expression (&scoop-search --hook)
+# initial oh-my-posh themes
+# git clone https://github.com/akirco/dotfiles.git $HOME\Documents\dotfiles --depth 1
 
- # initial terminal icons
- Import-Module Terminal-Icons
+oh-my-posh --init --shell pwsh --config "~\Documents\dotfiles\Documents\PowerShell\SHELL.json" | Invoke-Expression
 
- # set GuiCompletion
- Set-PSReadlineKeyHandler -Key DownArrow -ScriptBlock { Invoke-GuiCompletion }
+# terminal icons
+Import-Module Terminal-Icons
 
- # ...PSReadLine
- Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+# initial scoop auto complete
+$scoopComoletion="$($(Get-Item $(Get-Command scoop).Path).Directory.Parent.FullName)\modules\scoop-completion"
+write-host $scoopComoletion
 
- Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Import-Module $scoopComoletion
 
- # Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+$DirectoryPredictor = ("scoop prefix DirectoryPredictor" | Invoke-Expression )+"\DirectoryPredictor.dll"
 
- Set-PSReadlineOption -PredictionSource History
+Import-Module $DirectoryPredictor
 
- Set-PSReadlineOption -ShowToolTip
+Import-Module npm-completion
 
- # ls
- Set-Alias ll ls
+Import-Module z
 
- # scoop
- Set-Alias sco scoop
+# fast scoop search
+Invoke-Expression (&scoop-search --hook)
 
- # 清屏Ctrl+L
- Set-Alias c cls
+# alias
+Set-Alias ll ls
+Set-Alias sco scoop
+Set-Alias c cls
+Set-Alias t trash
+Set-Alias mpx mpxplay
+Set-Alias vm nvim
+Set-Alias lg lazygit
+Set-Alias mon monolith
+Set-Alias h touch
+Set-Alias n ntop  
+Set-Alias f2 rnr
+Set-Alias qr qrcp
 
- # kate
- Set-Alias k kate
+Set-PSReadlineOption -ShowToolTip
+Set-PSReadlineOption -PredictionSource History -PredictionViewStyle "ListView" -Colors @{
+  Command            = 'Magenta'
+  Number             = 'DarkGray'
+  Member             = 'DarkGray'
+  Operator           = 'DarkGray'
+  Type               = 'DarkGray'
+  Variable           = 'DarkGreen'
+  Parameter          = 'DarkGreen'
+  ContinuationPrompt = 'DarkGray'
+  Default            = 'DarkGray'
+}
 
- # 删除文件或目录
- Set-Alias t trash
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+#Set GuiCompletion 
+#Set-PSReadlineKeyHandler -Key DownArrow -ScriptBlock { Invoke-GuiCompletion }
 
- # 终端的播放器
- Set-Alias mpx mpxplay
+Enable-PoshTooltips
+Enable-PoshTransientPrompt
 
- # nvim
- Set-Alias vm nvim
 
- # scoop search
- Set-Alias scps scoop-search
+if(!(Get-PSSubsystem -Kind CommandPredictor).IsRegistered){
+    Enable-ExperimentalFeature PSSubsystemPluginModel
+    Set-PSReadLineOption -PredictionSource HistoryAndPlugin 
+}    
 
- # git
- Set-Alias lg lazygit
+function scoop_home {Start-Process -FilePath $(scoop prefix scoop)}
+function localdata {Start-Process -FilePath $env:userprofile\appdata\Local}
+function home {Start-Process -FilePath $env:userprofile}
+# git
+function gia {git add .}
+function gim {git commit -m $args}
+function gill {git pull}
+function gish {git push origin $args}
+function gine {git clone $args}
 
- # 打包网页到一个html
- Set-Alias mon monolith
+function lsd{Get-ChildItem -Filter .* -Path $args }
+function lsf{Get-ChildItem -Recurse . -Include *.$args}
 
- # 创建文件
- Set-Alias h touch
+# open $profile
+function pro {code $PROFILE.AllUsersCurrentHost}
+function lspro {$PROFILE | Get-Member -Type NoteProperty}
 
- # 终端的系统监视器
- Set-Alias n ntop
-
- # 重命名
- Set-Alias f2 rnr
-
- # 二维码发送文件
- Set-Alias qr qrcp
-
- #alias function
- function scoop_home {start -FilePath $(scoop prefix scoop)}
-
- function localdata {start -FilePath $env:userprofile\appdata\Local}
-
- function _apps {
-    $apps = scoop.ps1 export | ConvertFrom-Json
-    $app_list = $apps.apps | Format-Table
-    Write-Output $app_list
- }
-
- # extras
- Enable-PoshTooltips
- Enable-PoshTransientPrompt
+# get-CmdletAlias
+function gca ($cmdletname) {
+  Get-Alias |
+    Where-Object -FilterScript {$_.Definition -like "$cmdletname"} |
+      Format-Table -Property Definition, Name -AutoSize
+}
+# Clear-RecycleBin
+function crb {Clear-RecycleBin -Force}
 ```
 
 ## WSL
@@ -220,5 +240,4 @@ conda install --use-local <xxx.tar.gz>
 ## link deps
 conda install -c local <pkgPath>
 ```
-
 

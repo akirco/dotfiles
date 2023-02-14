@@ -1,0 +1,643 @@
+{
+    "buckets": [
+        {
+            "Name": "aki",
+            "Source": "https://github.com/akirco/aki-apps.git",
+            "Updated": "2023-02-14T17:02:48+08:00",
+            "Manifests": 316
+        },
+        {
+            "Name": "apps",
+            "Source": "https://github.com/kkzzhizhou/scoop-apps",
+            "Updated": "2023-02-14T12:42:41+08:00",
+            "Manifests": 9053
+        },
+        {
+            "Name": "extras",
+            "Source": "https://github.com/ScoopInstaller/Extras",
+            "Updated": "2023-02-14T12:30:00+08:00",
+            "Manifests": 1777
+        },
+        {
+            "Name": "java",
+            "Source": "https://github.com/ScoopInstaller/Java",
+            "Updated": "2023-02-14T12:20:15+08:00",
+            "Manifests": 254
+        },
+        {
+            "Name": "main",
+            "Source": "https://github.com/ScoopInstaller/Main",
+            "Updated": "2023-02-14T13:42:44+08:00",
+            "Manifests": 1162
+        },
+        {
+            "Name": "nerd-fonts",
+            "Source": "https://github.com/matthewjberger/scoop-nerd-fonts",
+            "Updated": "2023-02-13T00:15:34+08:00",
+            "Manifests": 214
+        },
+        {
+            "Name": "sysinternals",
+            "Source": "https://github.com/niheaven/scoop-sysinternals",
+            "Updated": "2023-01-26T04:29:58+08:00",
+            "Manifests": 75
+        }
+    ],
+    "apps": [
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "7zip",
+            "Updated": "2023-02-12T16:09:30.5400954+08:00",
+            "Version": "22.01"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "adb",
+            "Updated": "2023-02-12T16:13:54.3890176+08:00",
+            "Version": "34.0.0"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "aliyundrive",
+            "Updated": "2023-02-12T16:13:51.7352396+08:00",
+            "Version": "3.17.0"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "android-sdk",
+            "Updated": "2023-02-12T16:14:22.9997893+08:00",
+            "Version": "4333796"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "android-studio",
+            "Updated": "2023-02-13T14:11:53.6663154+08:00",
+            "Version": "2022.1.1.20"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "BaiduNetdisk",
+            "Updated": "2023-02-12T16:15:00.173+08:00",
+            "Version": "7.25.0.4"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "bilibili",
+            "Updated": "2023-02-12T16:15:14.6524803+08:00",
+            "Version": "1.9.1"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "cmake",
+            "Updated": "2023-02-13T16:11:33.503128+08:00",
+            "Version": "3.25.2"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "crow-translate",
+            "Updated": "2023-02-13T17:21:34.439664+08:00",
+            "Version": "2.10.3"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "dark",
+            "Updated": "2023-02-12T16:15:16.3171868+08:00",
+            "Version": "3.11.2"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "dart",
+            "Updated": "2023-02-13T16:06:21.372386+08:00",
+            "Version": "2.19.2"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "dim",
+            "Updated": "2023-02-12T16:16:17.1968415+08:00",
+            "Version": "0.1.1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "DirectoryPredictor",
+            "Updated": "2023-02-13T00:23:13.7523843+08:00",
+            "Version": "0.0.4"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "dismplusplus",
+            "Updated": "2023-02-12T16:16:18.7469551+08:00",
+            "Version": "10.1.1002.1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "empty-recycle-bin",
+            "Updated": "2023-02-12T16:16:20.1592784+08:00",
+            "Version": "1.0.0"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "everything",
+            "Updated": "2023-02-12T16:17:10.2013152+08:00",
+            "Version": "1.4.1.1022"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "fastbootenhance",
+            "Updated": "2023-02-12T16:17:11.6970858+08:00",
+            "Version": "1.4.0"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "fd",
+            "Updated": "2023-02-12T22:43:27.5665943+08:00",
+            "Version": "8.6.0"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "ffmpeg",
+            "Updated": "2023-02-12T16:22:44.601751+08:00",
+            "Version": "5.1.2"
+        },
+        {
+            "Info": "",
+            "Source": "apps",
+            "Name": "flutter",
+            "Updated": "2023-02-13T17:18:03.2762647+08:00",
+            "Version": "3.7.3"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "gcc",
+            "Updated": "2023-02-14T10:29:45.7486747+08:00",
+            "Version": "11.2.0"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "geekuninstaller",
+            "Updated": "2023-02-12T16:22:50.1365238+08:00",
+            "Version": "1.5.1.162"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "git",
+            "Updated": "2023-02-12T16:09:51.4303115+08:00",
+            "Version": "2.39.1.windows.1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "googlechrome",
+            "Updated": "2023-02-12T16:23:09.8254957+08:00",
+            "Version": "109.0.5414.120"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "idea",
+            "Updated": "2023-02-12T16:42:27.0758855+08:00",
+            "Version": "2022.3.2-223.8617.56"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "innounp",
+            "Updated": "2023-02-12T16:10:05.4006479+08:00",
+            "Version": "0.50"
+        },
+        {
+            "Info": "",
+            "Source": "apps",
+            "Name": "lazygit",
+            "Updated": "2023-02-12T16:23:17.7839734+08:00",
+            "Version": "0.37.0"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "lua",
+            "Updated": "2023-02-12T16:09:56.4393139+08:00",
+            "Version": "5.4.2"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "lua-language-server",
+            "Updated": "2023-02-12T16:10:01.1571889+08:00",
+            "Version": "3.6.10"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "luarocks",
+            "Updated": "2023-02-12T16:10:03.7384328+08:00",
+            "Version": "3.9.2"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "m3u8downloader",
+            "Updated": "2023-02-12T16:23:41.5628005+08:00",
+            "Version": "2.0.7"
+        },
+        {
+            "Info": "",
+            "Source": "apps",
+            "Name": "mactype-np",
+            "Updated": "2023-02-12T21:38:43.4900278+08:00",
+            "Version": "2021.1-rc1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "monolith",
+            "Updated": "2023-02-12T16:23:44.713309+08:00",
+            "Version": "2.7.0"
+        },
+        {
+            "Info": "",
+            "Source": "apps",
+            "Name": "motrix",
+            "Updated": "2023-02-13T23:15:13.163114+08:00",
+            "Version": "1.6.11"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "mpxplay",
+            "Updated": "2023-02-12T16:23:51.7025311+08:00",
+            "Version": "1.66"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "msys2",
+            "Updated": "2023-02-14T10:16:59.3001933+08:00",
+            "Version": "2023-01-27"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "neovim",
+            "Updated": "2023-02-14T14:10:02.7113398+08:00",
+            "Version": "0.8.3"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "neteasemusic",
+            "Updated": "2023-02-12T16:24:28.3584984+08:00",
+            "Version": "2.10.6.200601"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "npm-completion",
+            "Updated": "2023-02-14T16:48:02.2514551+08:00",
+            "Version": "0.1.0"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "ntop",
+            "Updated": "2023-02-12T16:24:29.8140781+08:00",
+            "Version": "0.3.4"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "nvm",
+            "Updated": "2023-02-12T16:24:32.1412743+08:00",
+            "Version": "1.1.10"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "obs-studio",
+            "Updated": "2023-02-12T18:47:40.2555593+08:00",
+            "Version": "29.0.2"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "oh-my-posh",
+            "Updated": "2023-02-12T16:24:58.5572188+08:00",
+            "Version": "14.2.7"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "openssl",
+            "Updated": "2023-02-12T16:12:39.3597366+08:00",
+            "Version": "3.0.8"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "pnpm",
+            "Updated": "2023-02-12T16:12:48.1860957+08:00",
+            "Version": "7.27.0"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "potplayer",
+            "Updated": "2023-02-13T23:31:31.4419677+08:00",
+            "Version": "230207"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "powertoys",
+            "Updated": "2023-02-12T20:59:28.0304668+08:00",
+            "Version": "0.67.1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "psutils",
+            "Updated": "2023-02-13T15:05:01.0572885+08:00",
+            "Version": "0.2020.02.27"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "pwsh",
+            "Updated": "2023-02-12T16:26:11.6274662+08:00",
+            "Version": "7.3.2"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "pycharm",
+            "Updated": "2023-02-12T16:28:07.4848242+08:00",
+            "Version": "2022.3.2-223.8617.48"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "python",
+            "Updated": "2023-02-12T18:25:55.4126466+08:00",
+            "Version": "3.11.2"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "qbittorrent-enhanced",
+            "Updated": "2023-02-14T00:09:02.6173028+08:00",
+            "Version": "4.5.0.10"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "qrcp",
+            "Updated": "2023-02-12T16:28:10.736357+08:00",
+            "Version": "0.9.1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "quarkpan",
+            "Updated": "2023-02-12T20:41:46.430034+08:00",
+            "Version": "2.5.10"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "quicklook",
+            "Updated": "2023-02-12T16:28:23.3616093+08:00",
+            "Version": "3.7.3"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "ripgrep",
+            "Updated": "2023-02-14T11:01:08.0828495+08:00",
+            "Version": "13.0.0"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "rnr",
+            "Updated": "2023-02-12T16:28:24.5562142+08:00",
+            "Version": "0.4.1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "s",
+            "Updated": "2023-02-14T09:24:33.1895599+08:00",
+            "Version": "0.6.7"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "scoop-completion",
+            "Updated": "2023-02-12T16:28:26.1263377+08:00",
+            "Version": "0.2.4"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "scoop-search",
+            "Updated": "2023-02-12T16:12:53.6322028+08:00",
+            "Version": "1.3.1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "scoops",
+            "Updated": "2023-02-12T16:28:29.0656006+08:00",
+            "Version": "0.1.1"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "snipaste",
+            "Updated": "2023-02-12T16:28:46.683217+08:00",
+            "Version": "2.8.3-Beta"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "sudo",
+            "Updated": "2023-02-13T23:39:04.9812888+08:00",
+            "Version": "0.2020.01.26"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "telegram",
+            "Updated": "2023-02-13T22:53:59.820503+08:00",
+            "Version": "4.6.2"
+        },
+        {
+            "Info": "",
+            "Source": "java",
+            "Name": "temurin8-jdk",
+            "Updated": "2023-02-13T17:16:33.8296635+08:00",
+            "Version": "8.0.362-9"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "terminal-icons",
+            "Updated": "2023-02-12T16:28:48.7837294+08:00",
+            "Version": "0.10.0"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "typora",
+            "Updated": "2023-02-13T17:44:16.8090732+08:00",
+            "Version": "1.0.2"
+        },
+        {
+            "Info": "",
+            "Source": "apps",
+            "Name": "upgit",
+            "Updated": "2023-02-13T13:52:01.3360694+08:00",
+            "Version": "0.2.18"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "upscaler",
+            "Updated": "2023-02-13T15:06:29.3999254+08:00",
+            "Version": "1.0.3"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "vcredist2022",
+            "Updated": "2023-02-12T16:29:13.2664608+08:00",
+            "Version": "14.34.31931.0"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "vivetool",
+            "Updated": "2023-02-12T16:12:55.6541696+08:00",
+            "Version": "0.3.2"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "vscode",
+            "Updated": "2023-02-12T16:29:39.9812419+08:00",
+            "Version": "1.75.1"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "webstorm",
+            "Updated": "2023-02-12T16:31:27.8748503+08:00",
+            "Version": "2022.3.2-223.8617.44"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "wechat",
+            "Updated": "2023-02-12T16:32:00.0067703+08:00",
+            "Version": "3.9.0.28"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "wegame",
+            "Updated": "2023-02-12T21:49:03.5517551+08:00",
+            "Version": "5.5.2.11181"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "windowsdesktop-runtime",
+            "Updated": "2023-02-12T20:44:51.6651816+08:00",
+            "Version": "7.0.1"
+        },
+        {
+            "Info": "",
+            "Source": "apps",
+            "Name": "windowsdesktop-runtime-lts",
+            "Updated": "2023-02-13T19:39:46.4696805+08:00",
+            "Version": "6.0.13"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "winxray",
+            "Updated": "2023-02-12T16:32:38.5815002+08:00",
+            "Version": "4.4"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "yarn",
+            "Updated": "2023-02-12T20:40:34.7979146+08:00",
+            "Version": "1.22.19"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "you-get",
+            "Updated": "2023-02-12T16:32:41.0640781+08:00",
+            "Version": "0.4.1650"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "youtube-dl",
+            "Updated": "2023-02-12T16:32:50.505813+08:00",
+            "Version": "2021.12.17"
+        },
+        {
+            "Info": "",
+            "Source": "aki",
+            "Name": "youtubedownloader",
+            "Updated": "2023-02-12T16:33:30.7523302+08:00",
+            "Version": "1.9.8"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "z",
+            "Updated": "2023-02-13T01:12:21.6473718+08:00",
+            "Version": "1.1.13"
+        },
+        {
+            "Info": "Global install",
+            "Source": "apps",
+            "Name": "JetBrainsMono-NF",
+            "Updated": "2023-02-12T20:17:01.587734+08:00",
+            "Version": "2.3.3"
+        },
+        {
+            "Info": "Global install",
+            "Source": "aki",
+            "Name": "trash",
+            "Updated": "2023-02-12T20:17:28.6411684+08:00",
+            "Version": "2.0.0"
+        }
+    ]
+}
