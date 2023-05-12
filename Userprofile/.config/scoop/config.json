@@ -1,22 +1,17 @@
 {
-  "lastupdate": "2022-10-11T22:53:05.0500952+08:00",
-  "SCOOP_REPO": "https://github.com/lukesampson/scoop",
-  "SCOOP_BRANCH": "master",
+  "root_path": "F:\\Scoop\\local",
+  "global_path": "F:\\Scoop\\global",
+  "last_update": "2023-05-12T11:46:14.7978345+08:00",
   "alias": {
-    "up": "scoop-up",
-    "rmc": "scoop-rmc",
-    "ls": "scoop-ls",
     "i": "scoop-i",
-    "rm": "scoop-rm",
+    "ls": "scoop-ls",
+    "up": "scoop-up",
     "rma": "scoop-rma",
-    "s": "scoop-s"
+    "rmc": "scoop-rmc",
+    "s": "scoop-s",
+    "rm": "scoop-rm"
   },
-  "aria2-warning-enabled": false,
-  "aria2--enabled": false,
   "aria2-enabled": false,
-  "debug": true,
-  "aria2-retry-wait": 4,
-  "aria2-split": 16,
-  "aria2-max-connection-per-server": 16,
-  "aria2-min-split-size": "4M"
+  "scoop_repo": "https://github.com/ScoopInstaller/Scoop",
+  "scoop_branch": "master"
 }

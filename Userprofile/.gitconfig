@@ -1,0 +1,14 @@
+[credential]
+	helper = manager
+[user]
+	email = earlfx@163.com
+	name = akirco
+[safe]
+
+[pull]
+	rebase = false
+[http "https://github.com"]
+[credential "helperselector"]
+	selected = manager
+[http]
+	sslverify = false
