@@ -1,5 +1,6 @@
 # https://learn.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.3
 
+
 # initial oh-my-posh themes
 oh-my-posh --init --shell pwsh --config "~\Documents\dotfiles\Documents\PowerShell\ayu.omp.json" | Invoke-Expression
 
@@ -8,17 +9,19 @@ oh-my-posh --init --shell pwsh --config "~\Documents\dotfiles\Documents\PowerShe
 # terminal icons
 Import-Module Terminal-Icons
 
-# initial scoop auto complete
-$scoopComoletion = "$($(Get-Item $(Get-Command scoop).Path).Directory.Parent.FullName)\modules\scoop-completion"
+Import-Module hosts
 
-Import-Module $scoopComoletion
+# initial scoop auto complete
+Import-Module scoop-completion
 
 Import-Module npm-completion
 
-Import-Module ZLocation
+Import-Module z
 
 # fast scoop search
-Invoke-Expression (&scoop-search --hook)
+
+Import-Module scoop-search
+
 
 
 
@@ -88,23 +91,23 @@ Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 Enable-PoshTooltips
 Enable-PoshTransientPrompt
 
-function lzf {Get-ChildItem . -Attributes Directory | Invoke-Fzf | Set-Location}
+function lzf { Get-ChildItem . -Attributes Directory | Invoke-Fzf | Set-Location }
 function ldzf { Get-ChildItem . -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { lf $_ } }
 function vmfzf { Get-ChildItem . -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { nvim $_ } }
 function codzf { Get-ChildItem . -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { code $_ -n } }
 function cofzf { Get-ChildItem . -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { code $_ -r } }
-function fdff {fd --glob $args | Invoke-Fzf | ForEach-Object { nvim $_ }}
+function fdff { fd --glob $args | Invoke-Fzf | ForEach-Object { nvim $_ } }
 function esf {
-    if(!$args) {
-     $args = $PWD.Path
-    }
-   es -parent "$args" /a-d /on -sort-descending | Invoke-Fzf | ForEach-Object { nvim $_ }
+  if (!$args) {
+    $args = $PWD.Path
+  }
+  es -parent "$args" /a-d /on -sort-descending | Invoke-Fzf | ForEach-Object { nvim $_ }
 }
 function esd {
-    if(!$args) {
-     $args = $PWD.Path
-    }
-   es /ad -parent $args | Invoke-Fzf | Set-Location
+  if (!$args) {
+    $args = $PWD.Path
+  }
+  es /ad -parent $args | Invoke-Fzf | Set-Location
 }
 
 function scoop_home { Start-Process -FilePath $(scoop prefix scoop) }
@@ -116,15 +119,15 @@ function gim { git commit -m $args }
 function gill { git pull }
 function gish { git push origin $args }
 
-function glne { git clone $args}
+function glne { git clone $args }
 
 function lsd { Get-ChildItem -Filter .* -Path $args }
 function lsf { Get-ChildItem -Recurse . -Include *.$args }
 
 # open $profile
-function pro { code $PROFILE.AllUsersCurrentHost }
+function pro { nvim $PROFILE.AllUsersCurrentHost }
 function lspro { $PROFILE | Get-Member -Type NoteProperty }
-function rwsl { sudo netsh winsock reset}
+function rwsl { sudo netsh winsock reset }
 
 # get-CmdletAlias
 function gca ($cmdletname) {
@@ -135,9 +138,14 @@ function gca ($cmdletname) {
 # Clear-RecycleBin
 function crb { Clear-RecycleBin -Force }
 
-function rma($item) {Remove-Item $item -Recurse -Force}
+function rma($item) { Remove-Item $item -Recurse -Force }
 
-
+function sprefix {
+  param (
+    [Parameter(Mandatory=$false, Position=0)][string]$appName
+  )
+  Start-Process $(scoop prefix $appName)
+}
 # nc
 
 function ncr { nc rm }
@@ -158,8 +166,7 @@ function TabExpansion($line, $lastWord) {
     Remove-Item Env:COMP_WORDS
     Remove-Item Env:COMP_CWORD
     Remove-Item Env:PIP_AUTO_COMPLETE
-  }
-  elseif (Test-Path Function:\_pip_completeBackup) {
+  } elseif (Test-Path Function:\_pip_completeBackup) {
     # Fall back on existing tab expansion
     _pip_completeBackup $line $lastWord
   }
@@ -171,15 +178,20 @@ function TabExpansion($line, $lastWord) {
 
 function conda_init {
   #region conda initialize
+  conda config --set env_prompt ''
   # !! Contents within this block are managed by 'conda init' !!
-  If (Test-Path "F:\Scoop\local\apps\anaconda3\current\Scripts\conda.exe") {
-      (& "F:\Scoop\local\apps\anaconda3\current\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ?{$_} | Invoke-Expression
+  If (Test-Path "E:\scoop\apps\miniconda3\current\Scripts\conda.exe") {
+      (& "E:\scoop\apps\miniconda3\current\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Where-Object { $_ } | Invoke-Expression
   }
-#endregion
+  #endregion
 }
 
-function cc($params){
-  conda create -n $params[0] python=$params[1]
+function pyc() {
+  param(
+    [Parameter(Mandatory=$false, Position=0)][string]$name,
+    [Parameter(Mandatory=$false, Position=1)][string]$pyversion
+  )
+  conda create -n $name python=$pyversion
 }
 
 # tips
