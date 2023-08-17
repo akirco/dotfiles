@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -415,6 +414,7 @@ conda install --use-local <xxx.tar.gz>
 ## link deps
 conda install -c local <pkgPath>
 ```
+
 =======
 
 <!-- TABLE OF CONTENTS -->
@@ -441,8 +441,7 @@ conda install -c local <pkgPath>
   </ol>
 </details>
 
-
-## scoop 
+## scoop
 
 - install
 
@@ -474,7 +473,7 @@ scoop bucket add aki 'https://github.com/akirco/aki-apps.git'
 
 - app backup
 
-> scoop import  [apps.json](https://github.com/akirco/dotfiles/blob/master/apps.json)
+> scoop import [apps.json](https://github.com/akirco/dotfiles/blob/master/apps.json)
 
 ## terminal settings
 
@@ -499,7 +498,8 @@ scoop bucket add aki 'https://github.com/akirco/aki-apps.git'
   - PSReadline(`already existed`)
   - z
   - Pester(`already existed`)
-- $profile 
+
+- $profile
 
 ```powershell
 # open profile
@@ -511,7 +511,7 @@ code $PROFILE.AllUsersCurrentHost
 
 
 # Global_Path
-$scoopPSModulePath = $env:PSModulePath.Split(';') | ForEach-Object { 
+$scoopPSModulePath = $env:PSModulePath.Split(';') | ForEach-Object {
     if("$_".Contains("\modules")){
         return $_
     }
@@ -554,7 +554,7 @@ Set-Alias vm nvim
 Set-Alias lg lazygit
 Set-Alias mon monolith
 Set-Alias h touch
-Set-Alias n ntop  
+Set-Alias n ntop
 Set-Alias f2 rnr
 Set-Alias qr qrcp
 
@@ -598,7 +598,7 @@ Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
 Enable-PoshTooltips
 Enable-PoshTransientPrompt
-  
+
 
 function ldzf { Get-ChildItem . -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { lf $_ } }
 function vmfzf { Get-ChildItem . -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { nvim $_ } }
@@ -680,7 +680,7 @@ conda create -n py36 python=3.6
 conda activate py36
 
 # exit pyenv
-conda deactivate 
+conda deactivate
 ```
 
 - conda settings
@@ -717,4 +717,4 @@ conda install --use-local <xxx.tar.gz>
 conda install -c local <pkgPath>
 ```
 
->>>>>>> 6aa086e (update)
+> > > > > > > 6aa086e (update)
