@@ -1,6 +1,6 @@
 function rma($item) { Remove-Item $item -Recurse -Force }
 
-function crb { Clear-RecycleBin -Force }
+function crb { Clear-RecycleBin -Force -InformationAction SilentlyContinue }
 
 
 # todo use psfzf 扩展 
