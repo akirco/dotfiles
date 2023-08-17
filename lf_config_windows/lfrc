@@ -1,0 +1,79 @@
+set icons true
+set info size
+set drawbox 
+
+# shell = cmd on Windows, sh on Unix
+set shell pwsh 
+
+# custom file preview
+set previewer "~/AppData/Local/lf/lf_scripts/preview.bat"
+
+map S push &start.<enter>
+
+map P &start pwsh -NoNewWindow -ArgumentList "-File E:\scoop\persist\lf\Cache\lf_scripts\play_audio.ps1 $env:f" 
+
+map <space> $vm $env:f
+
+
+# define a custom 'rename' command without prompt for overwrite
+cmd rename %rename $env:f
+map r push :rename<space>
+
+
+map Y &Set-Clipboard -Value ($Env:f -replace '"')
+
+cmd createfile %type nul > 
+map a push :createfile<space>
+
+cmd createdir %mkdir 
+map A push :createdir<space>
+
+# open explorer in current directory
+map od push &start.<enter>
+
+# clear d shortcut
+map d
+# remap d to original shortcut "cut"
+map dd cut
+
+# type del to delete a file
+cmd del %del $env:f
+map del del
+
+# map D to original shortcut delete (use this to delete folders)
+map D delete
+
+# drag and drop
+cmd drag push &python<space>%LOCALAPPDATA%/lf/lf_scripts/drag.py<space>multi<space>%fx%<enter>
+cmd dragonce push &python<space>%LOCALAPPDATA%/lf/lf_scripts/drag.py<space>once<space>%fx%<enter>
+map dr push :dragonce<enter>
+
+# Git
+
+cmd git_branch %{{
+    git branch
+    pwd_shell=%CD%
+    lf -remote "send %id% updir"
+    lf -remote "send %id% cd \"%pwd_shell%\""
+}}
+map gb :git_branch
+map gp !{{
+    # git pull
+    cls
+    git pull --rebase || true
+    echo "press ENTER"
+    read ENTER
+}}
+map gs ${{
+    # git status
+    clear
+    git status
+    echo "press ENTER"
+    read ENTER
+}}
+map gl ${{
+    # git log
+    clear
+    git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+}}
+
