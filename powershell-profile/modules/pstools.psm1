@@ -2,6 +2,10 @@ function rma($item) { Remove-Item $item -Recurse -Force }
 
 function crb { Clear-RecycleBin -Force -InformationAction SilentlyContinue }
 
+function cr { code.cmd . -r } 
+
+function cn { code.cmd . -n }
+
 
 # todo use psfzf 扩展 
 # get-CmdletAlias

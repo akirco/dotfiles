@@ -15,26 +15,33 @@ function tdl() {
     else {
         Write-Host "Invalid param...." -ForegroundColor Red
     }
-    
+}
+
+function GetWebJSONData {
+    param ( 
+        [Parameter(Mandatory = $true, Position = 0)][string]$url
+    )
+    $ProgressPreference = 'SilentlyContinue'
+    $WebJSONData = Invoke-WebRequest -Uri $url -Method Get -ContentType "application/json; charset=utf-8" -ErrorAction SilentlyContinue
+    return $WebJSONData
 }
 
 function dlSingleFile {
     param ( 
         [Parameter(Mandatory = $true, Position = 0)][string]$OriginURL
     )
-    $ProgressPreference = 'SilentlyContinue'
-    $EndPrefix = "?return_content=true"
     $StratPrefix = "https://telegra.ph"
-    $url = [string]$OriginURL.replace('"href":', "").replace('//telegra.ph', "//api.telegra.ph/getPage").replace('"', "") + $EndPrefix
-    $WebJSONData = Invoke-WebRequest -Uri $url -Method Get -ContentType "application/json; charset=utf-8" -ErrorAction SilentlyContinue
+    $url = [string]$OriginURL.replace('"href":', "").replace('//telegra.ph', "//api.telegra.ph/getPage").replace('"', "") + "?return_content=true"
+    $WebJSONData = GetWebJSONData -url $url
     $Images = (ConvertFrom-Json $WebJSONData.Content).result.content
     $Title = (ConvertFrom-Json $WebJSONData.Content).result.title
-    $StorePath = "$PicturesPath\\telegraph\\$Title"
+    $StorePath = "$PicturesPath\telegraph\$Title"
     if (!(Test-Path $StorePath)) {
-        New-Item -ItemType Directory -Path $StorePath
+        New-Item -ItemType Directory -Path $StorePath -ErrorAction SilentlyContinue
     }
-    Write-Host $Title
-
+    Write-Host "`nTelegraph Downloader`n" -BackgroundColor DarkGray 
+    Write-Host `t"downloading: 🖼️  "$Title`n
+    $ImagesInfo = @()
     $Images | ForEach-Object {
         if ($_.tag -eq "figure") {
             $ImageUrl = $_.children[0].attrs.src
@@ -43,20 +50,24 @@ function dlSingleFile {
             $ImageUrl = $_.attrs.src
         }
         if ($ImageUrl) {
-            Write-Host "URL:" $ImageUrl
             $ImageName = $ImageUrl.replace("/file/", "")
-            Write-Host "即将下载:" $StratPrefix$ImageUrl -ForegroundColor Magenta
-            # $ProgressPreference = 'SilentlyContinue'
-            Invoke-WebRequest -Uri $StratPrefix$ImageUrl -OutFile $StorePath\$ImageName -ErrorAction SilentlyContinue 
+            $imageFullPath = (Join-Path $StorePath $ImageName)
+            $ImagesInfo += [PSCustomObject]@{
+                Source      = "$StratPrefix$ImageUrl";
+                Destination = $imageFullPath
+            }
         }
     }
+    $start_time = Get-Date
+    $ImagesInfo | ForEach-Object -Parallel {
+        Start-BitsTransfer -Source $_.Source -Destination $_.Destination -ErrorAction SilentlyContinue -Description "⏳ downloading:$($_.Source)"
+    } -ThrottleLimit 10
+    Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
 }
-
 
 function dlPaseredFile {
     param (
-        [Parameter(Mandatory = $true)]
-        [String] $PaserFile
+        [Parameter(Mandatory = $true)][String] $PaserFile
     ) 
     if ($PaserFile) {
         Select-String -Path $PaserFile -Pattern "telegra.ph/" -AllMatches  | 
@@ -66,57 +77,53 @@ function dlPaseredFile {
         Set-Content .\TEMP
     }
     else {
-        <# Action when all if and elseif conditions are false #>
         Write-Host "Please enter the named `Result` json file path..." -ForegroundColor DarkCyan
     } 
     if (Test-Path .\TEMP) {
-        <# Action to perform if the condition is true #>
         $URLS = (Get-Content -Path .\TEMP).Split("\n")
-        # Write-Host $URLS
-        $Target = @()
-        $EndPrefix = "?return_content=true"
         $StratPrefix = "https://telegra.ph"
         $URLS | ForEach-Object {
-            # Write-Host $_
-            # if ($_.StartsWith("//")) {
             if ($_.contains('"text":')) {
-                $Target += $_.replace('"text":', "").replace('telegra.ph', "https://api.telegra.ph/getPage").replace('"', "") + $EndPrefix
+                $Target += $_.replace('"text":', "").replace('telegra.ph', "https://api.telegra.ph/getPage").replace('"', "") + "?return_content=true"
             }
             if ($_.contains('"href":')) {
-                $Target += $_.replace('"href":', "").replace('telegra.ph', "https://api.telegra.ph/getPage").replace('"', "") + $EndPrefix
+                $Target += $_.replace('"href":', "").replace('telegra.ph', "https://api.telegra.ph/getPage").replace('"', "") + "?return_content=true"
             }
-            # }
         }
         $Target | ForEach-Object {
             $RealUrl = ($_).Trim()
-            $WebJSONData = Invoke-WebRequest -Uri $RealUrl -Method Get -ContentType "application/json; charset=utf-8" -ErrorAction SilentlyContinue
+            $WebJSONData = GetWebJSONData -url $RealUrl
             $Images = (ConvertFrom-Json $WebJSONData.Content).result.content
             $Title = (ConvertFrom-Json $WebJSONData.Content).result.title
-            $StorePath = "$PicturesPath\\telegraph\\$Title"
-            if (Test-Path $StorePath) {
-                return
+            $StorePath = "$PicturesPath\telegraph\$Title"
+            if (!(Test-Path $StorePath)) {
+                New-Item -ItemType Directory -Path $StorePath -ErrorAction SilentlyContinue
+
             }
-            else {
-                New-Item -ItemType Directory -Path $StorePath
-            }
-            Write-Host $Title
+            Write-Host "`nTelegraph Downloader`n" -BackgroundColor DarkGray 
+            Write-Host `t"downloading: 🖼️  "$Title`n
+            $ImagesInfo = @()
             $Images | ForEach-Object {
-                if ($null -eq $_.children -or $_.children.Length -eq 0) {
-                    Write-Host "Null file..." -ForegroundColor Red
-                }
-                else {
+                if ($_.tag -eq "figure") {
                     $ImageUrl = $_.children[0].attrs.src
-                    if ($ImageUrl) {
-                        $ImageName = $ImageUrl.replace("/file/", "")
-                        Write-Host "即将下载:" $StratPrefix$ImageUrl -ForegroundColor Magenta
-                        $ProgressPreference = 'SilentlyContinue'
-                        Invoke-WebRequest -Uri $StratPrefix$ImageUrl -OutFile $StorePath\$ImageName -ErrorAction SilentlyContinue -UseBasicParsing
-                    }
-                    else {
-                        Write-Host "Null file..." -ForegroundColor Red
+                }
+                if ($_.tag -eq "img") {
+                    $ImageUrl = $_.attrs.src
+                }
+                if ($ImageUrl) {
+                    $ImageName = $ImageUrl.replace("/file/", "")
+                    $imageFullPath = (Join-Path $StorePath $ImageName)
+                    $ImagesInfo += [PSCustomObject]@{
+                        Source      = "$StratPrefix$ImageUrl";
+                        Destination = $imageFullPath
                     }
                 }   
             }
+            $start_time = Get-Date
+            $ImagesInfo | ForEach-Object -Parallel {
+                Start-BitsTransfer -Source $_.Source -Destination $_.Destination -ErrorAction SilentlyContinue -Description "⏳ downloading:$($_.Source)"
+            } -ThrottleLimit 10
+            Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
         }
     }
     else {
