@@ -59,9 +59,23 @@ function dlSingleFile {
         }
     }
     $start_time = Get-Date
+    $Global:throttleCount = 10
+    Write-Host "`ttotal: 🖼️  $($ImagesInfo.Length)`n"
     $ImagesInfo | ForEach-Object -Parallel {
-        Start-BitsTransfer -Source $_.Source -Destination $_.Destination -ErrorAction SilentlyContinue -Description "⏳ downloading:$($_.Source)"
-    } -ThrottleLimit 10
+        $SourceURL = $_.Source
+        $Destination = $_.Destination
+        try {
+            
+            Start-BitsTransfer -Source $SourceURL -Destination $Destination -ErrorAction SilentlyContinue -Description "⏳ downloading:$($_.Source)"
+        }
+        catch {
+            Write-Host "Network error, retrying..." -ForegroundColor DarkMagenta
+            $Global:throttleCount = 1
+        }
+        finally {
+            Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue
+        }
+    } -ThrottleLimit $Global:throttleCount
     Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
 }
 
@@ -101,7 +115,6 @@ function dlPaseredFile {
 
             }
             Write-Host "`nTelegraph Downloader`n" -BackgroundColor DarkGray 
-            Write-Host `t"downloading: 🖼️  "$Title`n
             $ImagesInfo = @()
             $Images | ForEach-Object {
                 if ($_.tag -eq "figure") {
@@ -120,9 +133,21 @@ function dlPaseredFile {
                 }   
             }
             $start_time = Get-Date
+            $Global:throttleCount = 10
+            Write-Host "`ttotal: 🖼️  $($ImagesInfo.Length)`n"
             $ImagesInfo | ForEach-Object -Parallel {
-                Start-BitsTransfer -Source $_.Source -Destination $_.Destination -ErrorAction SilentlyContinue -Description "⏳ downloading:$($_.Source)"
-            } -ThrottleLimit 10
+                try {
+        
+                    Start-BitsTransfer -Source $_.Source -Destination $_.Destination -ErrorAction SilentlyContinue -Description "⏳ downloading:$($_.Source)"
+                }
+                catch {
+                    Write-Host "Network error, retrying..." -ForegroundColor DarkMagenta
+                    $Global:throttleCount = 1
+                }
+                finally {
+                    Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue
+                }   
+            } -ThrottleLimit $Global:throttleCount
             Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
         }
     }
