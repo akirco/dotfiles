@@ -7,7 +7,7 @@ function esf {
     if (!$parentPath) {
         $parentPath = $PWD.Path
     }
-    es -parent "$parentPath" /a-d /on -sort-descending | Invoke-Fzf | ForEach-Object { nvim $_ }
+    es.exe -parent "$parentPath" /a-d /on -sort-descending | Invoke-Fzf | ForEach-Object { nvim $_ }
 }
   
 # Set-Location with every-thing cli & Invoke-Fzf
@@ -18,5 +18,5 @@ function esd {
     if (!$parentPath) {
         $parentPath = $PWD.Path
     }
-    es /ad -parent $parentPath | Invoke-Fzf | Set-Location
+    es.exe /ad -parent $parentPath | Invoke-Fzf | Set-Location
 }
