@@ -65,8 +65,7 @@ function dlSingleFile {
         $SourceURL = $_.Source
         $Destination = $_.Destination
         try {
-            
-            Start-BitsTransfer -Source $SourceURL -Destination $Destination -ErrorAction SilentlyContinue -Description "⏳ downloading:$($_.Source)"
+            Start-BitsTransfer -Source $SourceURL -Destination $Destination -Description "⏳ downloading:$($_.Source)"
         }
         catch {
             Write-Host "Network error, retrying..." -ForegroundColor DarkMagenta
@@ -137,8 +136,7 @@ function dlPaseredFile {
             Write-Host "`ttotal: 🖼️  $($ImagesInfo.Length)`n"
             $ImagesInfo | ForEach-Object -Parallel {
                 try {
-        
-                    Start-BitsTransfer -Source $_.Source -Destination $_.Destination -ErrorAction SilentlyContinue -Description "⏳ downloading:$($_.Source)"
+                    Start-BitsTransfer -Source $_.Source -Destination $_.Destination -Description "⏳ downloading:$($_.Source)"
                 }
                 catch {
                     Write-Host "Network error, retrying..." -ForegroundColor DarkMagenta
