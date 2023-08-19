@@ -14,7 +14,7 @@ oh-my-posh --init --shell pwsh --config "$ModulePath\\..\\theme\\ayu.omp.json" |
 Import-Module Terminal-Icons
 
 # hosts editor
-Import-Module hosts
+# Import-Module hosts
 
 # initial scoop auto complete
 Import-Module scoop-completion
@@ -64,6 +64,10 @@ Import-Module "$ModulePath\\telegraph.psm1"
 
 Import-Module "$ModulePath\\scoop.psm1"
 
+Import-Module "$ModulePath\\r3skin.psm1"
+
+Import-Module "$ModulePath\\remove.psm1"
+
 # replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
 Set-PsFzfOption -PSReadlineChordProvider 'alt+s' -PSReadlineChordReverseHistory 'alt+h'
 
@@ -71,20 +75,20 @@ Set-PsFzfOption -PSReadlineChordProvider 'alt+s' -PSReadlineChordReverseHistory 
 $commandOverride = [ScriptBlock] { param($Location) z $Location }
 Set-PsFzfOption -AltCCommand $commandOverride
 
-Set-PsFzfOption -EnableAliasFuzzyEdit
-Set-PsFzfOption -EnableAliasFuzzyFasd
-Set-PsFzfOption -EnableAliasFuzzyHistory
-Set-PsFzfOption -EnableAliasFuzzyKillProcess
-Set-PsFzfOption -EnableAliasFuzzySetLocation
-Set-PsFzfOption -EnableAliasFuzzyScoop
-Set-PsFzfOption -EnableAliasFuzzySetEverything
-Set-PsFzfOption -EnableAliasFuzzyZLocation
-Set-PsFzfOption -EnableAliasFuzzyGitStatus
-Set-PsFzfOption -EnableFd
+# Set-PsFzfOption -EnableAliasFuzzyEdit
+# Set-PsFzfOption -EnableAliasFuzzyFasd
+# Set-PsFzfOption -EnableAliasFuzzyHistory
+# Set-PsFzfOption -EnableAliasFuzzyKillProcess
+# Set-PsFzfOption -EnableAliasFuzzySetLocation
+# Set-PsFzfOption -EnableAliasFuzzyScoop
+# Set-PsFzfOption -EnableAliasFuzzySetEverything
+# Set-PsFzfOption -EnableAliasFuzzyZLocation
+# Set-PsFzfOption -EnableAliasFuzzyGitStatus
+# Set-PsFzfOption -EnableFd
 
 Enable-PoshTooltips
 Enable-PoshTransientPrompt
-Set-PSReadlineOption -ShowToolTip -PredictionViewStyle ListView -HistoryNoDuplicates
+Set-PSReadlineOption -ShowToolTip -PredictionViewStyle ListView -HistoryNoDuplicates -WarningAction SilentlyContinue
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin -HistoryNoDuplicates -Colors @{
     Command            = '#21acff'
     Number             = '#c678dd'
