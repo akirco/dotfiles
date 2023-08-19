@@ -73,8 +73,7 @@ function dlSingleFile {
             $Global:throttleCount = 1
         }
         finally {
-            Wait-Debugger
-            Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue
+            Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
         }
     } -ThrottleLimit $Global:throttleCount
     Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
@@ -146,8 +145,7 @@ function dlPaseredFile {
                     $Global:throttleCount = 1
                 }
                 finally {
-                    Wait-Debugger
-                    Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue
+                    Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
                 }   
             } -ThrottleLimit $Global:throttleCount
             Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
