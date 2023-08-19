@@ -73,6 +73,7 @@ function dlSingleFile {
             $Global:throttleCount = 1
         }
         finally {
+            Wait-Debugger
             Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue
         }
     } -ThrottleLimit $Global:throttleCount
@@ -145,6 +146,7 @@ function dlPaseredFile {
                     $Global:throttleCount = 1
                 }
                 finally {
+                    Wait-Debugger
                     Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue
                 }   
             } -ThrottleLimit $Global:throttleCount
