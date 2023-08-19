@@ -72,7 +72,12 @@ function dlSingleFile {
             $Global:throttleCount = 1
         }
         finally {
-            Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+            try {
+                Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue                
+            }
+            catch {
+                Write-Host "Current request is being used by another process" -ForegroundColor Red
+            }
         }
     } -ThrottleLimit $Global:throttleCount
     Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
@@ -143,7 +148,12 @@ function dlPaseredFile {
                     $Global:throttleCount = 1
                 }
                 finally {
-                    Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+                    try {
+                        Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue                
+                    }
+                    catch {
+                        Write-Host "Current request is being used by another process" -ForegroundColor Red
+                    }    
                 }   
             } -ThrottleLimit $Global:throttleCount
             Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
