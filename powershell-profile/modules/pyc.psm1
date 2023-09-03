@@ -13,7 +13,7 @@ function pycv() {
 # install package
 function pyi() {
     param(
-        [Parameter(Mandatory = $false, Position = 0)][string]$package,
+        [Parameter(Mandatory = $false, Position = 0)][string]$package
     )
     python -m pip install --use-pep517 $package
 }
