@@ -15,6 +15,7 @@ function r3skinInjector {
             $ExpandedPath = $gamePath + "\" + "R3nzSkin"
             $ExpandedFile = $gamePath + "\" + "R3nzSkin" + "\" + "R3nzSkin.dll"
             $InjectFile = $gamePath + "\" + "hid.dll"
+            Write-Host $downloadUrl
             Invoke-WebRequest -Uri https://ghproxy.com/$downloadUrl -OutFile $outputFile
             if (Test-Path $outputFile) {
                 Write-Host "downloaded..." -ForegroundColor DarkGray
