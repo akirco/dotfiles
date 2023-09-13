@@ -1,3 +1,7 @@
+using namespace System.IO
+using namespace System.Text
+using namespace System.Threading
+
 $PicturesPath = "$env:USERPROFILE\Pictures"
 
 function tdl() {
@@ -83,22 +87,74 @@ function dlSingleFile {
     Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
 }
 
+function parserFile () {
+    param ( 
+        [Parameter(Mandatory = $true)][string]$filePath
+    )
+    $searchPattern = "telegra.ph/"
+
+    # 以流的方式读取JSON文件
+    $streamReader = [StreamReader]::new($filePath)
+
+    # 定义每个块的大小（根据实际情况进行调整）
+    $blockSize = 1000
+
+    # 定义一个数组用于存储搜索结果
+    $searchResults = @()
+
+    # 定义计数器变量
+    $totalLines = 0
+    $processedLines = 0
+
+    while (!$streamReader.EndOfStream) {
+        $block = @()
+        for ($i = 0; $i -lt $blockSize -and !$streamReader.EndOfStream; $i++) {
+            $block += $streamReader.ReadLine()
+            $totalLines++
+        }
+
+        # 在当前块中搜索模式
+        $matchedLines = $block | Where-Object { $_ -match $searchPattern }
+
+        # 将搜索结果添加到数组中
+        $searchResults += $matchedLines
+
+        # 更新已处理行数
+        $processedLines += $matchedLines.Count
+
+        # 计算处理进度
+        $progress = [math]::Round($processedLines / $totalLines * 100, 2)
+
+        # 打印处理进度
+        Write-Host "处理进度：$progress% ($processedLines / $totalLines)"
+    }
+
+    # 关闭流
+    $streamReader.Close()
+
+    # 将搜索结果保存到文件
+    $outputFilePath = ".\searchResults.txt"
+    $searchResults | Out-File -FilePath $outputFilePath
+    # 打印保存结果的文件路径
+    Write-Host "搜索结果已保存到文件：$outputFilePath"
+}
+
+
+
 function dlPaseredFile {
     param (
-        [Parameter(Mandatory = $true)][String] $PaserFile
+        [Parameter(Mandatory = $true)][String]$PaserFile
     ) 
     if ($PaserFile) {
-        Select-String -Path $PaserFile -Pattern "telegra.ph/" -AllMatches  | 
-        Select-Object Line -Unique | 
-        Format-Table -HideTableHeaders | 
-        Out-String | 
-        Set-Content .\TEMP
+        $absolutePath = Convert-Path -Path $PaserFile
+        Write-Host $absolutePath
+        parserFile -filePath $absolutePath
     }
     else {
         Write-Host "Please enter the named `Result` json file path..." -ForegroundColor DarkCyan
     } 
-    if (Test-Path .\TEMP) {
-        $URLS = (Get-Content -Path .\TEMP).Split("\n")
+    if (Test-Path ".\searchResults.txt") {
+        $URLS = (Get-Content -Path ".\searchResults.txt").Split("\n")
         $StratPrefix = "https://telegra.ph"
         $URLS | ForEach-Object {
             if ($_.contains('"text":')) {
