@@ -55,6 +55,15 @@
           "type": "node"
         },
         {
+          "foreground": "#a277db",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "style": "plain",
+          "template": " {{.CurrentDate | date .Format}}",
+          "type": "time"
+        },
+        {
           "foreground": "#C94A16",
           "style": "plain",
           "template": "x ",
