@@ -1,0 +1,75 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground": "#26C6DA",
+          "properties": {
+            "windows": "\uF306"
+          },
+          "style": "plain",
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "type": "os"
+        },
+        {
+          "foreground": "#ffffff",
+          "style": "plain",
+          "template": " <#24ffc0>\u276f</>",
+          "type": "text"
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "#eb69ab",
+          "properties": {
+            "style": "folder"
+          },
+          "template": " <b>{{ .Path }}</b>"
+        },
+        {
+          "foreground": "#C678DD",
+          "properties": {
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "branch_icon": "\ue725 "
+          },
+          "style": "plain",
+          "template": " <#7dcfff>\u26a1</>({{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }})",
+          "type": "git"
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "#906cff",
+          "template": " <#7dcfff>\u26a1</>(\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }})"
+        },
+        {
+          "foreground": "#98C379",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "<#ffffff>via</> \ue781 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "type": "node"
+        },
+        {
+          "foreground": "#C94A16",
+          "style": "plain",
+          "template": "x ",
+          "type": "status"
+        },
+        {
+          "foreground": "#ffffff",
+          "style": "plain",
+          "template": " <#ffd483>\u276f</>",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "version": 2
+}

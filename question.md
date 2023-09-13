@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 https://www.pinclipart.com/
 
 ## how to install deb pack with `manjaro`?
@@ -25,7 +24,7 @@ cd F:\Scoop\local\apps\android-studio\current
 
 sudo New-Item -Type SymbolicLink -Path jre -Value "F:\Scoop\local\apps\temurin8-jdk\current"
 ```
-=======
+
 https://www.pinclipart.com/
 
 ## how to install deb pack with `manjaro`?
@@ -50,4 +49,3 @@ sudo pacman -U XXX.tar.xz
 cd F:\Scoop\local\apps\android-studio\current
 sudo New-Item -Type SymbolicLink -Path jre -Value "F:\Scoop\local\apps\temurin8-jdk\current"
 ```
->>>>>>> 6aa086e (update)
