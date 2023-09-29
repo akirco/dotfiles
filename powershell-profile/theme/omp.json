@@ -5,15 +5,6 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#26C6DA",
-          "properties": {
-            "windows": "\uF306"
-          },
-          "style": "plain",
-          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "type": "os"
-        },
-        {
           "foreground": "#ffffff",
           "style": "plain",
           "template": " <#24ffc0>\u276f</>",
@@ -36,7 +27,7 @@
             "branch_icon": "\ue725 "
           },
           "style": "plain",
-          "template": " <#7dcfff>\u26a1</>({{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }})",
+          "template": " <#7dcfff>\u26a1</>{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}",
           "type": "git"
         },
         {
@@ -51,7 +42,7 @@
             "fetch_version": true
           },
           "style": "plain",
-          "template": "<#ffffff>via</> \ue781 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "template": " <#7dcfff>\u26a1</>\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "type": "node"
         },
         {
@@ -60,7 +51,7 @@
             "time_format": "15:04"
           },
           "style": "plain",
-          "template": " {{.CurrentDate | date .Format}}",
+          "template": " <#7dcfff>\u26a1</>\uf017 {{.CurrentDate | date .Format}}",
           "type": "time"
         },
         {
