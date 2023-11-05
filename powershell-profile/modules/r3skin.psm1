@@ -1,5 +1,5 @@
 function r3skinInjector {
-    $gameName = "英雄联盟"
+    $gameName = "LOL"
     $uninstallKeys = Get-ChildItem -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall' | Get-ItemProperty
     $gameKey = $uninstallKeys | Where-Object { $_.DisplayName -like "*$gameName*" }
     $R3skinRelease = "https://api.github.com/repos/R3nzTheCodeGOD/R3nzSkin/releases/latest"
