@@ -1,4 +1,4 @@
-function GetTips {
+function get-tips {
 
     $tips = @(
         [pscustomobject]@{

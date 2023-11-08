@@ -15,7 +15,8 @@ function gish {
 }
 function glne { 
     param ( 
-        [Parameter(Mandatory = $false, Position = 0)][string]$gitRepoUrl
+        [Parameter(Mandatory = $false, Position = 0)][string]$gitRepoUrl,
+        [Parameter(Mandatory = $false, Position = 1)][string]$dir
     )
-    git clone $gitRepoUrl 
+    git clone $gitRepoUrl $dir
 }
