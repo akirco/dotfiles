@@ -124,6 +124,17 @@ function scoopAdd {
     [Parameter(Mandatory = $false, Position = 1)][Object]$searchResult
   )
   $bucketPath = Join-Path $root_path "buckets" "remote"
+
+  $remotePath = Join-Path $bucketPath "bucket"
+
+
+  if (!(Test-Path $remotePath)) {
+    Write-Host "Creating remote bucket...$remotePath" -ForegroundColor DarkYellow
+
+    New-Item -ItemType Directory -Path $remotePath
+  }
+
+
   $bucket = $addAPP.Split("/")[0]
   $app = $addAPP.Split("/")[1]
 
@@ -145,11 +156,16 @@ function scoopAdd {
 
   $outFile = Join-Path $bucketPath $filteredApp
 
+  Write-Host "Remote app ManifestFile is downloading..." -ForegroundColor Cyan
+  Write-Host "Url:" $remoteManifestFile -ForegroundColor Green
+
+  Write-Host "Downloading...$outFile" -ForegroundColor Cyan
+
 
   Invoke-WebRequest -Uri $remoteManifestFile -OutFile $outFile
 
   if (Test-Path $outFile) {
-    Write-Host "Remote app ManifestFile is add successful..." -ForegroundColor Cyan
+    Write-Host "Remote app ManifestFile is add successful...`nType 'scoop install remote/$app' to install app" -ForegroundColor Magenta
   }
 }
 
