@@ -1,5 +1,6 @@
 
 # global path
+# git clone https://github.com/akirco/dotfiles "$env:USERPROFILE\\documents\\dotfiles"
 $ModulePath = "$env:USERPROFILE\\documents\\dotfiles\\powershell-profile\\modules"
 
 # Enable-ExperimentalFeature PSSubsystem
@@ -14,7 +15,7 @@ oh-my-posh --init --shell pwsh --config "$ModulePath\\..\\theme\\ayu.omp.json" |
 Import-Module Terminal-Icons
 
 # hosts editor
-# Import-Module hosts
+Import-Module hosts
 
 # initial scoop auto complete
 Import-Module scoop-completion
@@ -25,8 +26,6 @@ Import-Module npm-completion
 # ZLocation
 Import-Module ZLocation
 
-# fast scoop search
-# Import-Module scoop-search
 
 # completion suggestions
 Import-Module CompletionPredictor
@@ -39,7 +38,7 @@ Import-Module PSEverything
 
 
 
-# chatgpt 
+# chatgpt
 Import-Module "$ModulePath\\chatgpt.psm1"
 
 # tips log
@@ -62,6 +61,7 @@ Import-Module "$ModulePath\\everything.psm1"
 
 Import-Module "$ModulePath\\telegraph.psm1"
 
+# fast scoop search
 Import-Module "$ModulePath\\scoop.psm1"
 
 Import-Module "$ModulePath\\r3skin.psm1"
@@ -107,53 +107,53 @@ Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
 
 function lzd {
-    param ( 
+    param (
         [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
     )
     if (!$parentPath) {
         $parentPath = $PWD.Path
     }
-    Get-ChildItem $parentPath -Attributes Directory | Invoke-Fzf | Set-Location 
+    Get-ChildItem $parentPath -Attributes Directory | Invoke-Fzf | Set-Location
 }
 function lfzd {
-    param ( 
+    param (
         [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
     )
     if (!$parentPath) {
         $parentPath = $PWD.Path
     }
-    Get-ChildItem $parentPath -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { lf $_ } 
+    Get-ChildItem $parentPath -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { lf $_ }
 }
 function vmf {
-    param ( 
+    param (
         [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
     )
     if (!$parentPath) {
         $parentPath = $PWD.Path
     }
-    Get-ChildItem $parentPath -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { nvim $_ } 
+    Get-ChildItem $parentPath -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { nvim $_ }
 }
 function coded {
-    param ( 
+    param (
         [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
     )
     if (!$parentPath) {
         $parentPath = $PWD.Path
     }
-    Get-ChildItem $parentPath -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { code $_ -n } 
+    Get-ChildItem $parentPath -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { code $_ -n }
 }
 function codef {
-    param ( 
+    param (
         [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
     )
     if (!$parentPath) {
         $parentPath = $PWD.Path
     }
-    Get-ChildItem $parentPath -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { code $_ -r } 
+    Get-ChildItem $parentPath -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { code $_ -r }
 }
 function vmfdf {
-    param ( 
+    param (
         [Parameter(Mandatory = $true, Position = 0)][string]$regxExp
     )
-    fd.exe --glob $regxExp | Invoke-Fzf | ForEach-Object { nvim $_ } 
+    fd.exe --glob $regxExp | Invoke-Fzf | ForEach-Object { nvim $_ }
 }
