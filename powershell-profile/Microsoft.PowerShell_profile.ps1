@@ -2,6 +2,7 @@
 # global path
 # git clone https://github.com/akirco/dotfiles "$env:USERPROFILE\\documents\\dotfiles"
 $ModulePath = "$env:USERPROFILE\\documents\\dotfiles\\powershell-profile\\modules"
+# $OMPThemesPath = Join-Path (scoop prefix oh-my-posh) "themes"
 
 # Enable-ExperimentalFeature PSSubsystem
 if (!(Get-PSSubsystem -Kind CommandPredictor).IsRegistered) {
@@ -9,13 +10,13 @@ if (!(Get-PSSubsystem -Kind CommandPredictor).IsRegistered) {
 }
 
 # initial oh-my-posh themes
-oh-my-posh --init --shell pwsh --config "$ModulePath\\..\\theme\\ayu.omp.json" | Invoke-Expression
+oh-my-posh --init --shell pwsh --config "$ModulePath\\..\\theme\\omp.json" | Invoke-Expression
 
 # terminal icons
 Import-Module Terminal-Icons
 
 # hosts editor
-Import-Module hosts
+# Import-Module hosts
 
 # initial scoop auto complete
 Import-Module scoop-completion
@@ -26,6 +27,8 @@ Import-Module npm-completion
 # ZLocation
 Import-Module ZLocation
 
+# fast scoop search
+# Import-Module scoop-search
 
 # completion suggestions
 Import-Module CompletionPredictor
@@ -35,8 +38,6 @@ Import-Module DirectoryPredictor
 
 # PSEverything
 Import-Module PSEverything
-
-
 
 # chatgpt
 Import-Module "$ModulePath\\chatgpt.psm1"
@@ -61,12 +62,13 @@ Import-Module "$ModulePath\\everything.psm1"
 
 Import-Module "$ModulePath\\telegraph.psm1"
 
-# fast scoop search
 Import-Module "$ModulePath\\scoop.psm1"
 
 Import-Module "$ModulePath\\r3skin.psm1"
 
 Import-Module "$ModulePath\\remove.psm1"
+
+Import-Module "$ModulePath\\sd.psm1"
 
 # replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
 Set-PsFzfOption -PSReadlineChordProvider 'alt+s' -PSReadlineChordReverseHistory 'alt+h'
