@@ -1,17 +1,19 @@
 {
-  "root_path": "F:\\Scoop\\local",
-  "global_path": "F:\\Scoop\\global",
-  "last_update": "2023-05-12T11:46:14.7978345+08:00",
+  "root_path": "E:\\scoop",
+  "global_path": "E:\\scoop\\global",
+  "last_update": "2024-08-05T11:27:43.3001726+08:00",
+  "scoop_repo": "https://github.com/ScoopInstaller/Scoop",
+  "scoop_branch": "master",
   "alias": {
     "i": "scoop-i",
+    "s": "scoop-s",
     "ls": "scoop-ls",
+    "rm": "scoop-rm",
     "up": "scoop-up",
     "rma": "scoop-rma",
-    "rmc": "scoop-rmc",
-    "s": "scoop-s",
-    "rm": "scoop-rm"
+    "rmc": "scoop-rmc"
   },
   "aria2-enabled": false,
-  "scoop_repo": "https://github.com/ScoopInstaller/Scoop",
-  "scoop_branch": "master"
+  "sd_apikey": "38812ef2a19aa0c49243a6d4f6015ff0",
+  "sd_apisecret": "MDMxZWRmZWFiYTQ3NTU1OTc1OTdiZDJh"
 }
