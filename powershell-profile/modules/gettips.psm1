@@ -5,45 +5,45 @@ function get-tips {
             Command     = 'hosts'
             Parameter   = "up/cat"
             Description = 'cat hosts or update github dns'
-  
+
         },
         [pscustomobject]@{
             Command     = 'z'
             Parameter   = "dir"
             Description = 'zlocation'
-  
+
         },
         [pscustomobject]@{
             Command     = 'scoop'
             Parameter   = "dir:open appdir with fileExplorer. add:add remote app"
             Description = 'scoop extendsions'
-  
+
         },
         [pscustomobject]@{
             Command     = 'ct/ChatGpt'
             Description = 'the terminal chabot'
-  
+
         },
         [pscustomobject]@{
             Command     = 'gt/gettips'
             Description = 'get all commands tips'
-  
+
         },
         [pscustomobject]@{
             Command     = 'pyc'
             Parameter   = "arg1:envName,arg2:python version"
             Description = 'conad create env'
-  
+
         },
         [pscustomobject]@{
             Command     = 'pyinit'
             Description = 'active python env'
-  
+
         },
         [pscustomobject]@{
             Command     = 'gia'
             Description = 'git add .'
-  
+
         },
         [pscustomobject]@{
             Command     = 'gim'
@@ -150,15 +150,15 @@ function get-tips {
             Description = 'download telegraph images'
         },
         [pscustomobject]@{
-            Map         = 'alt+s'
+            Command     = 'alt+s'
             Description = 'list & open file with default app'
         },
         [pscustomobject]@{
-            Map         = 'alt+h'
+            Command     = 'alt+h'
             Description = 'list all history with psfzf'
         },
         [pscustomobject]@{
-            Map         = 'F2'
+            Command     = 'F2'
             Description = 'switch the Set-PSReadlineOption predictionViewStyle'
         }
     )

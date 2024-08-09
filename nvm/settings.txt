@@ -1,7 +1,2 @@
-root: F:\OS Scoop\Scoop\persist\nvm-windows\nodejs
-arch: 64
-proxy: none
-originalpath: .
-originalversion: 
-node_mirror: https://npm.taobao.org/mirrors/node/
-npm_mirror: https://npm.taobao.org/mirrors/npm/
+node_mirror: https://registry.npmmirror.com/node/
+npm_mirror: https://registry.npmmirror.com/npm/
