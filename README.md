@@ -26,9 +26,18 @@
 
 - `if you have a better share to leave a link.`
 
+## dev env setup
+
+```powershell
+# #This scripts is not tested yet...
+# run as admin
+irm https://raw.githubusercontent.com/akirco/dotfiles/master/setup.ps1 | iex
+
+```
+
 ## neovim
 
-- use [NvChad](https://github.com/NvChad/NvChad)
+- use [astronvim](https://docs.astronvim.com/)
 
 ## scoop
 
