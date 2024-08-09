@@ -456,7 +456,6 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 
 if ($isAdmin -eq $false) {
   Write-Host "Please run this script as an administrator" -ForegroundColor Red
-  exit
 }
 
 LoadingAnimation -Delay 100 -Iterations 10 -Label "Checking system info..."
