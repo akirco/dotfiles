@@ -25,14 +25,14 @@ $WslCommands = @(
 $extraCommands = @(
   "git clone https://github.com/akirco/dotfiles.git $env:USERPROFILE\.config\dotfiles",
   "scoop import $env:USERPROFILE\.config\dotfiles\apps.json",
-  "Write-Host 'installing dotfiles' -ForegroundColor Green"
-  "Move-Item $env:USERPROFILE\.config\dotfiles\user-profile\.gitconfig $env:USERPROFILE\.gitconfig -Force",
-  "Move-Item $env:USERPROFILE\.config\dotfiles\user-profile\.npmrc $env:USERPROFILE\.npmrc -Force",
-  "Move-Item $env:USERPROFILE\.config\dotfiles\user-profile\.condarc $env:USERPROFILE\.condarc -Force",
-  "Move-Item $env:USERPROFILE\.config\dotfiles\user-profile\pip $env:USERPROFILE\pip -Force -Recurse",
-  "Move-Item $env:USERPROFILE\.config\dotfiles\user-profile\.cargo $env:USERPROFILE\.cargo -Force",
-  "Move-Item $env:USERPROFILE\.config\dotfiles\powershell-profile\Microsoft.PowerShell_profile.ps1 $PROFILE.AllUsersCurrentHost -Force",
-  "Move-Item $env:USERPROFILE\.config\dotfiles\nvm\settings.txt $(scoop prefix nvm)\settings.txt -Force"
+  "Write-Host 'installing dotfiles' -ForegroundColor Green",
+  "lns -source $env:USERPROFILE\.gitconfig -target $env:USERPROFILE\.config\dotfiles\user-profile\.gitconfig",
+  "lns -source $env:USERPROFILE\.npmrc -target $env:USERPROFILE\.config\dotfiles\user-profile\.npmrc"
+  "lns -source $env:USERPROFILE\.condarc -target $env:USERPROFILE\.config\dotfiles\user-profile\.condarc",
+  "lnj -source $env:USERPROFILE\pip -target $env:USERPROFILE\.config\dotfiles\user-profile\pip",
+  "lnj -source $env:USERPROFILE\.cargo -target $env:USERPROFILE\.config\dotfiles\user-profile\.cargo",
+  "lns -source $PROFILE.AllUsersCurrentHost -target $env:USERPROFILE\.config\dotfiles\powershell-profile\Microsoft.PowerShell_profile.ps1",
+  "Get-Content $env:USERPROFILE\.config\dotfiles\nvm\settings.txt >> $(scoop prefix nvm)\settings.txt"
 )
 
 
@@ -132,6 +132,21 @@ function ExecuteCommands {
   }
 }
 
+function lns {
+  param (
+    [string]$source,
+    [string]$target
+  )
+  New-Item -Path $source -ItemType SymbolicLink -Target $target -ErrorAction SilentlyContinue
+}
+
+function lnj {
+  param (
+    [string]$source,
+    [string]$target
+  )
+  New-Item -Path $source -ItemType Junction -Target $target -ErrorAction SilentlyContinue
+}
 
 
 # -------------------------------- SYSTEMINFO -------------------------------- #
