@@ -2,6 +2,13 @@
 # ------------------------------ globalVariable ------------------------------ #
 $Global:DEVDRIVE = $null
 
+$envDir = Join-Path $Global:DEVDRIVE "envs"
+$pnpmDir = Join-Path $envDir  "pnpm"
+$npmDir = Join-Path $envDir  "npm"
+$pipDir = Join-Path $envDir  "pip"
+
+
+
 $ScoopCommands = @(
   "scoop bucket add extras",
   "scoop install git 7zip innounp dark",
@@ -23,6 +30,10 @@ $WslCommands = @(
 )
 
 $extraCommands = @(
+  "New-Item -Path $envDir -ItemType Directory -Force",
+  "New-Item -Path $pnpmDir -ItemType Directory -Force",
+  "New-Item -Path $npmDir -ItemType Directory -Force",
+  "New-Item -Path $pipDir -ItemType Directory -Force",
   "git clone https://github.com/akirco/dotfiles.git $env:USERPROFILE\.config\dotfiles",
   "scoop import $env:USERPROFILE\.config\dotfiles\apps.json",
   "Write-Host 'installing dotfiles' -ForegroundColor Green",
@@ -32,7 +43,20 @@ $extraCommands = @(
   "lnj -source $env:USERPROFILE\pip -target $env:USERPROFILE\.config\dotfiles\user-profile\pip",
   "lnj -source $env:USERPROFILE\.cargo -target $env:USERPROFILE\.config\dotfiles\user-profile\.cargo",
   "lns -source $PROFILE.AllUsersCurrentHost -target $env:USERPROFILE\.config\dotfiles\powershell-profile\Microsoft.PowerShell_profile.ps1",
-  "Get-Content $env:USERPROFILE\.config\dotfiles\nvm\settings.txt >> $(scoop prefix nvm)\settings.txt"
+  "Get-Content $env:USERPROFILE\.config\dotfiles\nvm\settings.txt >> $(scoop prefix nvm)\settings.txt",
+  "pip config set global.cache-dir $pipDir\global-caches"
+  "pip config set user.cache-dir $pipDir\user-caches",
+  "npm config set prefix=$npmDir\moudles",
+  "npm config set cache=$npmDir\caches",
+  "npm config set shell=where.exe pwsh.exe"
+  "npm config set store-dir=$pnpmDir\.pnpm-store",
+  "npm config set global-bin-dir=$pnpmDir\.pnpm-global\bin",
+  "npm config set global-dir=$pnpmDir\.pnpm-global",
+  "npm config set cache-dir=$pnpmDir\.pnpm-cache",
+  "npm config set state-dir=$pnpmDir\.pnpm-state",
+  "npm config set electron-cache-dir=$npmDir\electron-cache-dir",
+  "npm config set node-gyp=$npmDir\moudles\node_modules\node-gyp\bin\node-gyp.js",
+  "write-host 'settings completed...' -ForegroundColor Green"
 )
 
 
