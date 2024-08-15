@@ -276,7 +276,7 @@ function New_DevDrive {
   $res = Confirm-Action -Message "`r`n[$vhdPath]:[$size],Confirmed?" -Default "Yes"
   if ($res -eq $false) { return }
   try {
-    New-VHD -Path $vhdPath -Dynamic -SizeBytes $size | Out-Null
+    New-VHD -Path $vhdPath -Dynamic -SizeBytes $size -ErrorAction Inquire
 
     $vhd = Get-VHD -Path $vhdPath -ErrorAction Stop
 
