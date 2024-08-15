@@ -2,10 +2,10 @@
 # ------------------------------ globalVariable ------------------------------ #
 $Global:DEVDRIVE = $null
 
-$envDir = Join-Path $Global:DEVDRIVE "envs"
-$pnpmDir = Join-Path $envDir  "pnpm"
-$npmDir = Join-Path $envDir  "npm"
-$pipDir = Join-Path $envDir  "pip"
+$Global:envDir = $null
+$Global:pnpmDir = $null
+$Global:npmDir = $null
+$Global:pipDir = $null
 
 
 
@@ -18,7 +18,8 @@ $ScoopCommands = @(
   "scoop alias add rm 'scoop uninstall $args[0]' 'uninstall app'",
   "scoop alias add up 'scoop update $args[0]' 'update app or itself'",
   "scoop alias add rma 'scoop cleanup *' 'remove old version'",
-  "scoop alias add rmc 'scoop cache rm *' 'remove dowloaded file'"
+  "scoop alias add rmc 'scoop cache rm *' 'remove dowloaded file'",
+  "scoop bucket add extras",
   "Write-Host 'scoop setting done...' -ForegroundColor Green"
 )
 
@@ -30,12 +31,7 @@ $WslCommands = @(
 )
 
 $extraCommands = @(
-  "New-Item -Path $envDir -ItemType Directory -Force",
-  "New-Item -Path $pnpmDir -ItemType Directory -Force",
-  "New-Item -Path $npmDir -ItemType Directory -Force",
-  "New-Item -Path $pipDir -ItemType Directory -Force",
   "git clone https://github.com/akirco/dotfiles.git $env:USERPROFILE\.config\dotfiles",
-  "scoop import $env:USERPROFILE\.config\dotfiles\apps.json",
   "Write-Host 'installing dotfiles' -ForegroundColor Green",
   "lns -source $env:USERPROFILE\.gitconfig -target $env:USERPROFILE\.config\dotfiles\user-profile\.gitconfig",
   "lns -source $env:USERPROFILE\.npmrc -target $env:USERPROFILE\.config\dotfiles\user-profile\.npmrc"
@@ -46,16 +42,16 @@ $extraCommands = @(
   "Get-Content $env:USERPROFILE\.config\dotfiles\nvm\settings.txt >> $(scoop prefix nvm)\settings.txt",
   "pip config set global.cache-dir $pipDir\global-caches"
   "pip config set user.cache-dir $pipDir\user-caches",
-  "npm config set prefix=$npmDir\moudles",
-  "npm config set cache=$npmDir\caches",
-  "npm config set shell=where.exe pwsh.exe"
-  "npm config set store-dir=$pnpmDir\.pnpm-store",
-  "npm config set global-bin-dir=$pnpmDir\.pnpm-global\bin",
-  "npm config set global-dir=$pnpmDir\.pnpm-global",
-  "npm config set cache-dir=$pnpmDir\.pnpm-cache",
-  "npm config set state-dir=$pnpmDir\.pnpm-state",
-  "npm config set electron-cache-dir=$npmDir\electron-cache-dir",
-  "npm config set node-gyp=$npmDir\moudles\node_modules\node-gyp\bin\node-gyp.js",
+  # "npm config set prefix=$npmDir\moudles",
+  # "npm config set cache=$npmDir\caches",
+  # "npm config set shell=where.exe pwsh.exe"
+  # "npm config set store-dir=$pnpmDir\.pnpm-store",
+  # "npm config set global-bin-dir=$pnpmDir\.pnpm-global\bin",
+  # "npm config set global-dir=$pnpmDir\.pnpm-global",
+  # "npm config set cache-dir=$pnpmDir\.pnpm-cache",
+  # "npm config set state-dir=$pnpmDir\.pnpm-state",
+  # "npm config set electron-cache-dir=$npmDir\electron-cache-dir",
+  # "npm config set node-gyp=$npmDir\moudles\node_modules\node-gyp\bin\node-gyp.js",
   "write-host 'settings completed...' -ForegroundColor Green"
 )
 
@@ -301,6 +297,10 @@ function New_DevDrive {
 
     if ((Get-Volume -DriveLetter $driveLetter).OperationalStatus) {
       $Global:DEVDRIVE = $driveLetter
+      $Global:envDir = Join-Path $Global:DEVDRIVE "envs"
+      $Global:pnpmDir = Join-Path $envDir  "pnpm"
+      $Global:npmDir = Join-Path $envDir  "npm"
+      $Global:pipDir = Join-Path $envDir  "pip"
       Write-Host "New devdrive:$Global:DEVDRIVE created successfully`n`n" -ForegroundColor Blue
     }
   }
@@ -434,7 +434,7 @@ function install_scoop {
         Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
 
         ExecuteCommands -commands $ScoopCommands
-
+        Remove-Item "$env:USERPROFILE\Downloads\installer.ps1" -Force
       }
       catch {
         <#Do this if a terminating exception happens#>
