@@ -276,11 +276,12 @@ function New_DevDrive {
   $res = Confirm-Action -Message "`r`n[$vhdPath]:[$size],Confirmed?" -Default "Yes"
   if ($res -eq $false) { return }
   try {
+    $size = $([uint64] ($size / 1))
     New-VHD -Path $vhdPath -Dynamic -SizeBytes $size -ErrorAction Inquire
 
     $vhd = Get-VHD -Path $vhdPath -ErrorAction Stop
 
-   # $vhd | Select-Object -Property ComputerName, VhdType, VhdFormat, Path, @{Name = "TotolSize(GB)"; Expression = { [math]::Round($_.Size / 1GB, 2) } }, Number | Format-Table -AutoSize
+    $vhd | Select-Object -Property ComputerName, VhdType, VhdFormat, Path, @{Name = "TotolSize(GB)"; Expression = { [math]::Round($_.Size / 1GB, 2) } }, Number | Format-Table -AutoSize
 
 
     Mount-VHD -Path  $vhdPath
