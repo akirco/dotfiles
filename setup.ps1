@@ -1,5 +1,7 @@
 
 # ------------------------------ globalVariable ------------------------------ #
+
+$Global:DEVDRIVEPATH="C:\DevDrive\devhome.vhdx"
 $Global:DEVDRIVE = $null
 
 $Global:envDir = $null
@@ -11,14 +13,17 @@ $Global:pipDir = $null
 
 $ScoopCommands = @(
   "scoop bucket add extras",
-  "scoop install git 7zip innounp dark",
-  "scoop alias add i 'scoop install $args[0]' 'install app'"
-  "scoop alias add s 'scoop search $args[0]' search app",
-  "scoop alias add ls 'scoop list' 'List installed apps'",
-  "scoop alias add rm 'scoop uninstall $args[0]' 'uninstall app'",
-  "scoop alias add up 'scoop update $args[0]' 'update app or itself'",
-  "scoop alias add rma 'scoop cleanup *' 'remove old version'",
-  "scoop alias add rmc 'scoop cache rm *' 'remove dowloaded file'",
+  "scoop bucket add aki 'https://github.com/akirco/aki-apps.git'",
+  "scoop install 7zip innounp dark git grep nvm",
+  "scoop install aki/python",
+  "nvm install 20.16.0 && nvm use 20.16.0"
+  "scoop alias add i scoop install $args[0] 'install app'"
+  "scoop alias add s scoop search $args[0] search app",
+  "scoop alias add ls scoop list 'List installed apps'",
+  "scoop alias add rm scoop uninstall $args[0] 'uninstall app'",
+  "scoop alias add up scoop update $args[0] 'update app or itself'",
+  "scoop alias add rma scoop cleanup * 'remove old version'",
+  "scoop alias add rmc scoop cache rm * 'remove dowloaded file'",
   "scoop bucket add extras",
   "Write-Host 'scoop setting done...' -ForegroundColor Green"
 )
@@ -31,32 +36,45 @@ $WslCommands = @(
 )
 
 $extraCommands = @(
-  "git clone https://github.com/akirco/dotfiles.git $env:USERPROFILE\.config\dotfiles",
   "Write-Host 'installing dotfiles' -ForegroundColor Green",
   "lns -source $env:USERPROFILE\.gitconfig -target $env:USERPROFILE\.config\dotfiles\user-profile\.gitconfig",
-  "lns -source $env:USERPROFILE\.npmrc -target $env:USERPROFILE\.config\dotfiles\user-profile\.npmrc"
+  "Copy-Item $env:USERPROFILE\.config\dotfiles\user-profile\.npmrc $env:USERPROFILE\.npmrc -Force"
   "lns -source $env:USERPROFILE\.condarc -target $env:USERPROFILE\.config\dotfiles\user-profile\.condarc",
   "lnj -source $env:USERPROFILE\pip -target $env:USERPROFILE\.config\dotfiles\user-profile\pip",
   "lnj -source $env:USERPROFILE\.cargo -target $env:USERPROFILE\.config\dotfiles\user-profile\.cargo",
   "lns -source $PROFILE.AllUsersCurrentHost -target $env:USERPROFILE\.config\dotfiles\powershell-profile\Microsoft.PowerShell_profile.ps1",
-  "Get-Content $env:USERPROFILE\.config\dotfiles\nvm\settings.txt >> $(scoop prefix nvm)\settings.txt",
+  "write-output $(Get-Content $env:USERPROFILE\.config\dotfiles\nvm\settings.txt) >> $($(scoop prefix nvm)+"\settings.txt")",
   "pip config set global.cache-dir $pipDir\global-caches"
   "pip config set user.cache-dir $pipDir\user-caches",
-  # "npm config set prefix=$npmDir\moudles",
-  # "npm config set cache=$npmDir\caches",
-  # "npm config set shell=where.exe pwsh.exe"
-  # "npm config set store-dir=$pnpmDir\.pnpm-store",
-  # "npm config set global-bin-dir=$pnpmDir\.pnpm-global\bin",
-  # "npm config set global-dir=$pnpmDir\.pnpm-global",
-  # "npm config set cache-dir=$pnpmDir\.pnpm-cache",
-  # "npm config set state-dir=$pnpmDir\.pnpm-state",
-  # "npm config set electron-cache-dir=$npmDir\electron-cache-dir",
-  # "npm config set node-gyp=$npmDir\moudles\node_modules\node-gyp\bin\node-gyp.js",
+  "npm config set prefix=$npmDir\moudles",
+  "npm config set cache=$npmDir\caches",
+  "npm config set shell=where.exe pwsh.exe"
+  "npm config set store-dir=$pnpmDir\.pnpm-store",
+  "npm config set global-bin-dir=$pnpmDir\.pnpm-global\bin",
+  "npm config set global-dir=$pnpmDir\.pnpm-global",
+  "npm config set cache-dir=$pnpmDir\.pnpm-cache",
+  "npm config set state-dir=$pnpmDir\.pnpm-state",
+  "npm config set electron-cache-dir=$npmDir\electron-cache-dir",
+  "npm config set node-gyp=$npmDir\moudles\node_modules\node-gyp\bin\node-gyp.js",
   "write-host 'settings completed...' -ForegroundColor Green"
 )
 
 
 # ----------------------------------- utils ---------------------------------- #
+
+function Check_Command{
+  param([string]$command)
+  try {
+    if (where.exe $command) {
+      return $true
+    }else{
+      return $false
+    }
+  }
+  catch {
+    return $false
+  }
+}
 
 function Confirm-Action {
   param (
@@ -260,9 +278,34 @@ function Check_DiskVolumes {
 
 
 # ----------------------------------- VHDX ----------------------------------- #
+
+function Check_VHD {
+  if (Get-VHD $Global:DEVDRIVEPATH) {
+    CheckDEVDRIVE
+    return;
+  }
+  else {
+    LoadingAnimation -Delay 100 -Iterations 10 -Label "Checking system info..."
+    Check_SystemInfo
+    $res = Confirm-Action -Message "Do you want to create a new dev drive?" -Default "Yes"
+    if ($res) {
+      LoadingAnimation -Delay 100 -Iterations 10 -Label "Checking disk volumes..."
+
+      Check_DiskVolumes
+
+      New_DevDrive
+
+    }
+    else {
+     return
+    }
+  }
+}
+
+
 function New_DevDrive {
-  Write-Host "`nCreating new dev drive`n" -ForegroundColor Blue
-  $vhdPath = Read-Host "Please input vhd path(e.g.'C:\DevDrive\devhome.vhdx')"
+  Write-Host "`nCreating new dev drive in $Global:DEVDRIVEPATH`n" -ForegroundColor Blue
+  $vhdPath = $Global:DEVDRIVEPATH
   $size = Read-Host "Please input size in GB (e.g. 10GB)"
   $regex = "^[A-Z]:\\[^:*?<>|]+\\[^:*?<>|]+\.(vhdx)$"
   if (!($vhdPath -match $regex)) {
@@ -310,6 +353,17 @@ function New_DevDrive {
   }
 }
 
+function CheckDEVDRIVE {
+  $diskNumber = (Get-VHD -Path $Global:DEVDRIVEPATH | Select-Object -Property Number).Number
+  $partitions= Get-Partition -DiskNumber $diskNumber -PartitionNumber 2
+  $DriveLetter = $partitions.DriveLetter
+  $Global:DEVDRIVE=$DriveLetter+":\"
+  $Global:envDir = Join-Path $Global:DEVDRIVE "envs"
+  $Global:pnpmDir = Join-Path $envDir  "pnpm"
+  $Global:npmDir = Join-Path $envDir  "npm"
+  $Global:pipDir = Join-Path $envDir  "pip"
+}
+
 function Remove-DevDrive {
   try {
     $vhd = Get-VHD -Path $vhdPath -ErrorAction Stop
@@ -337,6 +391,10 @@ function Remove-DevDrive {
 
 # ------------------------------------ WSL ----------------------------------- #
 function Setup_WSL {
+
+  if($(wsl --status | findstr.exe "2").EndsWith("2")){
+    return
+  }
 
   $osVersion = [System.Environment]::OSVersion.Version
 
@@ -407,48 +465,62 @@ function Setup_WSL {
 
 # ---------------------------------- NETWORK --------------------------------- #
 function Check_Network {
-  $networkStatus = Test-Connection -ComputerName github.com -Count 3 -Verbose
-  $networkStatus | Format-Table -AutoSize
+  LoadingAnimation -Delay 100 -Iterations 10 -Label "Checking network..."
+  try {
+    $networkStatus = Test-Connection -ComputerName github.com -Count 3 -Verbose
+    $networkStatus | Format-Table -AutoSize
+  }
+  catch {
+    continue
+  }
 }
 
 # ----------------------------------- scoop ---------------------------------- #
 
 
 function install_scoop {
-  Invoke-RestMethod get.scoop.sh -outfile "$env:USERPROFILE\Downloads\installer.ps1"
-  if (Test-Path -Path "$env:USERPROFILE\Downloads\installer.ps1") {
-    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-    Write-Host -NoNewline "`nPlease input install dir:" -ForegroundColor Yellow
-    $installPath = Read-Host
-    $globalInstallPath = $installPath + "\global"
+  if (Check_Command -command scoop) {
+    return
+  }else{
+    Check_Network
+    LoadingAnimation -Delay 100 -Iterations 10 -Label "downloading scoop installer..."
+    Invoke-RestMethod get.scoop.sh -outfile "$env:USERPROFILE\Downloads\installer.ps1"
+    if (Test-Path -Path "$env:USERPROFILE\Downloads\installer.ps1") {
+      Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+      Write-Host "`ninstalling scoop to devdrive..." -ForegroundColor Yellow
+      $installPath = Join-Path $Global:DEVDRIVE "scoop"
+      $globalInstallPath = Join-Path $installPath "global"
+      Write-Host "scoop_dir: $installPath\n scoop_global_dir:$globalInstallPath"
 
-    @($installPath, $globalInstallPath) | Format-Table -AutoSize
+      Invoke-Expression "$env:USERPROFILE\Downloads\installer.ps1 -RunAsAdmin -ScoopDir $installPath -ScoopGlobalDir $globalInstallPath -NoProxy"
 
-    Write-Host "installing scoop..."
+      if ((Get-Command scoop).Name -eq "scoop.ps1") {
+        Write-Host "scoop installed successfully" -ForegroundColor Green
+        try {
+          Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
 
-    Invoke-Expression "$env:USERPROFILE\Downloads\installer.ps1 -RunAsAdmin -ScoopDir $installPath -ScoopGlobalDir $globalInstallPath -NoProxy"
-
-    if ((Get-Command scoop).Name -eq "scoop.ps1") {
-      Write-Host "scoop installed successfully" -ForegroundColor Green
-      try {
-        Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
-
-        ExecuteCommands -commands $ScoopCommands
-        Remove-Item "$env:USERPROFILE\Downloads\installer.ps1" -Force
-      }
-      catch {
-        <#Do this if a terminating exception happens#>
+          ExecuteCommands -commands $ScoopCommands
+          Remove-Item "$env:USERPROFILE\Downloads\installer.ps1" -Force
+        }
+        catch {
+          <#Do this if a terminating exception happens#>
+        }
       }
     }
-  }
-  else {
-    Write-Host "scoop installer download failed, please check your network" -ForegroundColor Red
+    else {
+      Write-Host "scoop installer download failed, please check your network" -ForegroundColor Red
+    }
   }
 }
 
 # ------------------------------------ git ----------------------------------- #
 
 function Setup_Git {
+
+  if(git config --global user.name){
+    return
+  }
+
   Write-Host -NoNewline "Please input your git username:" -ForegroundColor DarkCyan
   $username = Read-Host
   Write-Host -NoNewline "Please input your git email:" -ForegroundColor DarkCyan
@@ -466,7 +538,7 @@ function Setup_Npm {
   if (!(Test-Path $Global:DEVDRIVE)) {
     $Global:DEVDRIVE = Read-Host -Prompt "Please input driveLetter"
   }
-  $EnvsPath = $Global:DEVDRIVE + ":\envs"
+  $EnvsPath = $Global:DEVDRIVE + "envs"
 
   if (!(Test-Path $EnvsPath)) {
     New-Item -ItemType Directory -Path $EnvsPath
@@ -475,15 +547,15 @@ function Setup_Npm {
   $electronCachePath = $EnvsPath + "\electron"
   $pnpmPath = $EnvsPath + "\pnpm"
   $nodegypPath = $npmPath + "\modules\node_modules\node-gyp\bin\node-gyp.js"
-  Write-Host "prefix=$npmPath\modules" >> "$env:USERPROFILE\.npmrc"
-  Write-Host "cache=$npmPath\caches" >> "$env:USERPROFILE\.npmrc"
-  Write-Host "store-dir=$pnpmPath\.pnpm-store" >> "$env:USERPROFILE\.npmrc"
-  Write-Host "global-dir=$pnpmPath\.pnpm-global" >> "$env:USERPROFILE\.npmrc"
-  Write-Host "global-bin-dir=$pnpmPath\.pnpm-global\bin" >> "$env:USERPROFILE\.npmrc"
-  Write-Host "cache-dir=$pnpmPath\.pnpm-caches" >> "$env:USERPROFILE\.npmrc"
-  Write-Host "state-dir=$pnpmPath\.pnpm-state" >> "$env:USERPROFILE\.npmrc"
-  Write-Host "electron-cache-dir=$electronCachePath\caches" >> "$env:USERPROFILE\.npmrc"
-  Write-Host "node-gyp=$nodegypPath" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "prefix=$npmPath\modules" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "cache=$npmPath\caches" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "store-dir=$pnpmPath\.pnpm-store" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "global-dir=$pnpmPath\.pnpm-global" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "global-bin-dir=$pnpmPath\.pnpm-global\bin" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "cache-dir=$pnpmPath\.pnpm-caches" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "state-dir=$pnpmPath\.pnpm-state" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "electron-cache-dir=$electronCachePath\caches" >> "$env:USERPROFILE\.npmrc"
+  Write-Output "node-gyp=$nodegypPath" >> "$env:USERPROFILE\.npmrc"
 }
 
 
@@ -499,57 +571,22 @@ if ($isAdmin -eq $false) {
   break;
 }
 
-LoadingAnimation -Delay 100 -Iterations 10 -Label "Checking system info..."
-Check_SystemInfo
 
+Check_VHD
 
+install_scoop
 
-$res = Confirm-Action -Message "Do you want to create a new dev drive?" -Default "Yes"
+Setup_WSL
 
-if ($res) {
-  LoadingAnimation -Delay 100 -Iterations 10 -Label "Checking disk volumes..."
+Setup_Git
 
-  Check_DiskVolumes
-
-  New_DevDrive
-
-  LoadingAnimation -Delay 100 -Iterations 10 -Label "Checking network..."
-
-  Check_Network
-
-  LoadingAnimation -Delay 100 -Iterations 10 -Label "downloading scoop installer..."
-
-  install_scoop
-
-  Setup_WSL
-
-  Setup_Git
-
-  ExecuteCommands -commands $extraCommands
-
-  Setup_Npm
+if(-not (Test-Path "$env:USERPROFILE\.config\dotfiles")){
+  ExecuteCommands -commands "git clone https://github.com/akirco/dotfiles.git $env:USERPROFILE\.config\dotfiles"
 }
-else {
-  Write-Host "`nSkipping dev drive creation`n" -ForegroundColor Blue
-
-  LoadingAnimation -Delay 100 -Iterations 10 -Label "Checking network..."
-
-  Check_Network
-
-  LoadingAnimation -Delay 100 -Iterations 10 -Label "downloading scoop installer..."
-
-  install_scoop
-
-  Setup_WSL
-
-  Setup_Git
-
-  ExecuteCommands -commands $extraCommands
-
-  Setup_Npm
-}
+ExecuteCommands -commands $extraCommands
 
 
+Setup_Npm
 
 
 
