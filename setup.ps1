@@ -426,7 +426,7 @@ function install_scoop {
 
     Write-Host "installing scoop..."
 
-    Invoke-Expression "$env:USERPROFILE\Downloads\installer.ps1 -ScoopDir $installPath -ScoopGlobalDir $globalInstallPath -NoProxy"
+    Invoke-Expression "$env:USERPROFILE\Downloads\installer.ps1 -RunAsAdmin -ScoopDir $installPath -ScoopGlobalDir $globalInstallPath -NoProxy"
 
     if ((Get-Command scoop).Name -eq "scoop.ps1") {
       Write-Host "scoop installed successfully" -ForegroundColor Green
