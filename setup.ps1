@@ -266,7 +266,7 @@ function Check_DiskVolumes {
 # ----------------------------------- VHDX ----------------------------------- #
 function New_DevDrive {
   Write-Host "`nCreating new dev drive`n" -ForegroundColor Blue
-  $vhdPath = Read-Host "Please input vhd path(e.g.'C:\devhome\dev.vhdx')"
+  $vhdPath = Read-Host "Please input vhd path(e.g.'C:\DevDrive\devhome.vhdx')"
   $size = Read-Host "Please input size in GB (e.g. 10GB)"
   $regex = "^[A-Z]:\\[^:*?<>|]+\\[^:*?<>|]+\.(vhdx)$"
   if (!($vhdPath -match $regex)) {
