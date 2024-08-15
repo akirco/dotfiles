@@ -280,7 +280,7 @@ function New_DevDrive {
 
     $vhd = Get-VHD -Path $vhdPath -ErrorAction Stop
 
-    $vhd | Select-Object -Property ComputerName, VhdType, VhdFormat, Path, @{Name = "TotolSize(GB)"; Expression = { [math]::Round($_.Size / 1GB, 2) } }, Number | Format-Table -AutoSize
+   # $vhd | Select-Object -Property ComputerName, VhdType, VhdFormat, Path, @{Name = "TotolSize(GB)"; Expression = { [math]::Round($_.Size / 1GB, 2) } }, Number | Format-Table -AutoSize
 
 
     Mount-VHD -Path  $vhdPath
