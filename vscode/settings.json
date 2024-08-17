@@ -1,0 +1,143 @@
+{
+  //  Workbench settings
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.startupEditor": "none",
+  "workbench.productIconTheme": "fluent-icons",
+  "workbench.colorTheme": "GitHub Dark",
+  "workbench.editorAssociations": {
+    "*.mp4": "vscode.videoPreview",
+    "*.png": "imagePreview.previewEditor",
+    "*.mp3": "vscode.audioPreview"
+  },
+  //Editor settings
+  "editor.fontSize": 20,
+  "editor.fontFamily": "'FiraCode Nerd Font Mono',Consolas",
+  "editor.fontLigatures": true,
+  "editor.autoIndent": "full",
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorStyle": "line",
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": false,
+  "editor.linkedEditing": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.accessibilitySupport": "off",
+  "editor.lineHeight": 25,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.stickyTabStops": true,
+  "editor.tabCompletion": "on",
+  "editor.suggest.insertMode": "replace",
+  "editor.formatOnSave": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.tabSize": 2,
+  "editor.suggestSelection": "first",
+  "editor.largeFileOptimizations": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  },
+  // Window settings
+  "window.restoreWindows": "none",
+  "window.zoomLevel": 2,
+  // Git settings
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.openRepositoryInParentFolders": "never",
+  "security.workspace.trust.enabled": false,
+  //Terminal settings
+  "terminal.integrated.profiles.windows": {
+    "pwsh": {
+      "path": "E:\\scoop\\apps\\pwsh\\current\\pwsh.exe",
+      "args": ["-Nologo"]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "pwsh",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.cursorStyle": "underline",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.ignoreProcessNames": ["oh-my-posh", "fzf", "es"],
+  "terminal.integrated.enableImages": true,
+  "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono'",
+  "terminal.integrated.fontWeight": "400",
+  // Explorer settings
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  // Language settings
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "[javascriptreact]": {
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  "[python]": {
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace"
+  },
+  // Extensions settings
+  "extensions.autoUpdate": "onlyEnabledExtensions",
+  "powershell.pester.codeLens": false,
+  "powershell.codeFormatting.autoCorrectAliases": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "rech.batch.alertConflictingExtensions": false,
+  "redhat.telemetry.enabled": false,
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "onFocusChange",
+  "color-highlight.matchWords": true,
+  "color-highlight.matchRgbWithNoFunction": true,
+  "markdown.occurrencesHighlight.enabled": true,
+  "errorLens.excludeBySource": ["eslint(prettier/prettier)", "ts(1064)"],
+  "ProjectManager.root": "D:\\projects",
+  "ProjectManager.category": "bash-script,code-extensions,dart-lang,database,electron,flutter,go-lang,leetcode,lua-lang,markdown,miniapp,nextjs,nodejs,openplan,powershell,python,react-native,reactjs,remote-repository,rust-lang,tauri-apps,temp,tui-app,vuejs,webapi",
+  "ProjectManager.scaffolds": {
+    "Vite": "npx create-vite template && mv .\\template\\* .\\",
+    "ElectronVite": "npx create-electron-vite template && mv .\\template\\* .\\",
+    "ReactApp": "npx create-react-app template && mv .\\template\\* .\\",
+    "NextApp": "npx create-next-app@latest template && mv .\\template\\* .\\",
+    "ViteExtra": "npx create-vite-extra template && mv .\\template\\* .\\",
+    "Cargo": "cargo new template && mv .\\template\\* .\\",
+    "Crx": "npx create-crx-app template && mv .\\template\\* .\\",
+    "Astro": "npx create-astro template && mv .\\template\\* .\\",
+    "Tauri": "pnpm create tauri-app template && mv .\\template\\* .\\"
+  },
+  "marscode.chatLanguage": "en",
+  "marscode.codeCompletionPro": {
+    "enableCodeCompletionPro": true
+  },
+  "remote.SSH.remotePlatform": {
+    "*.gitpod.io": "linux"
+  },
+  "remote.SSH.defaultExtensions": ["gitpod.gitpod-remote-ssh"],
+  "lldb.launch.terminal": "integrated"
+}
