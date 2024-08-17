@@ -1,57 +1,38 @@
 
 # global path
 # git clone https://github.com/akirco/dotfiles "$env:USERPROFILE\\documents\\dotfiles"
-$ModulePath = "$env:USERPROFILE\\documents\\dotfiles\\powershell-profile\\modules"
-# $OMPThemesPath = Join-Path (scoop prefix oh-my-posh) "themes"
+$ModulePath = "$env:USERPROFILE\\.config\\dotfiles\\powershell\\modules"
+$OMPThemesPath = "$ModulePath\\..\\theme\\omp.json"
+
 
 # Enable-ExperimentalFeature PSSubsystem
-if (!(Get-PSSubsystem -Kind CommandPredictor).IsRegistered) {
+try {
+    Get-PSSubsystem -Kind CommandPredictor | Out-Null
+}
+catch {
     Enable-ExperimentalFeature -Name PSSubsystemPluginModel -WarningAction SilentlyContinue
 }
-
 # initial oh-my-posh themes
-oh-my-posh --init --shell pwsh --config "$ModulePath\\..\\theme\\omp.json" | Invoke-Expression
+oh-my-posh --init --shell pwsh --config $OMPThemesPath | Invoke-Expression
 
-# terminal icons
 Import-Module Terminal-Icons
 
-# hosts editor
-# Import-Module hosts
+Import-Module PSWindowsUpdate
 
-# initial scoop auto complete
-Import-Module scoop-completion
-
-# npm-completion
-Import-Module npm-completion
-
-# ZLocation
 Import-Module ZLocation
 
-# fast scoop search
-# Import-Module scoop-search
-
-# completion suggestions
 Import-Module CompletionPredictor
 
-# directory suggestions
 Import-Module DirectoryPredictor
 
-# PSEverything
 Import-Module PSEverything
 
-# chatgpt
-Import-Module "$ModulePath\\chatgpt.psm1"
-
-# tips log
 Import-Module "$ModulePath\\gettips.psm1"
 
-# alias
 Import-Module "$ModulePath\\alias.psm1"
 
-# conda create env : pyc name pyversion
 Import-Module "$ModulePath\\pyc.psm1"
 
-# active_conda_env
 Import-Module "$ModulePath\\pyinit.psm1"
 
 Import-Module "$ModulePath\\pstools.psm1"
@@ -70,6 +51,10 @@ Import-Module "$ModulePath\\remove.psm1"
 
 Import-Module "$ModulePath\\sd.psm1"
 
+Import-Module "$ModulePath\\extras.psm1"
+
+Import-Module "$ModulePath\\winget.psm1"
+
 # replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
 Set-PsFzfOption -PSReadlineChordProvider 'alt+s' -PSReadlineChordReverseHistory 'alt+h'
 
@@ -77,16 +62,16 @@ Set-PsFzfOption -PSReadlineChordProvider 'alt+s' -PSReadlineChordReverseHistory 
 $commandOverride = [ScriptBlock] { param($Location) z $Location }
 Set-PsFzfOption -AltCCommand $commandOverride
 
-# Set-PsFzfOption -EnableAliasFuzzyEdit
-# Set-PsFzfOption -EnableAliasFuzzyFasd
-# Set-PsFzfOption -EnableAliasFuzzyHistory
-# Set-PsFzfOption -EnableAliasFuzzyKillProcess
-# Set-PsFzfOption -EnableAliasFuzzySetLocation
-# Set-PsFzfOption -EnableAliasFuzzyScoop
-# Set-PsFzfOption -EnableAliasFuzzySetEverything
-# Set-PsFzfOption -EnableAliasFuzzyZLocation
-# Set-PsFzfOption -EnableAliasFuzzyGitStatus
-# Set-PsFzfOption -EnableFd
+Set-PsFzfOption -EnableAliasFuzzyEdit
+Set-PsFzfOption -EnableAliasFuzzyFasd
+Set-PsFzfOption -EnableAliasFuzzyHistory
+Set-PsFzfOption -EnableAliasFuzzyKillProcess
+Set-PsFzfOption -EnableAliasFuzzySetLocation
+Set-PsFzfOption -EnableAliasFuzzyScoop
+Set-PsFzfOption -EnableAliasFuzzySetEverything
+Set-PsFzfOption -EnableAliasFuzzyZLocation
+Set-PsFzfOption -EnableAliasFuzzyGitStatus
+Set-PsFzfOption -EnableFd
 
 Enable-PoshTooltips
 Enable-PoshTransientPrompt

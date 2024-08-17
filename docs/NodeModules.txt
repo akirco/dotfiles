@@ -1,4 +1,4 @@
-D:\devenvs\npm\moudles
+
 ├── @electron/asar@3.2.4
 ├── @electron/rebuild@3.2.13
 ├── @microsoft/rush@5.101.1

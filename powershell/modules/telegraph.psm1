@@ -5,7 +5,7 @@ using namespace System.Threading
 $PicturesPath = "$env:USERPROFILE\Pictures"
 
 function tdl() {
-    param ( 
+    param (
         [Parameter(Mandatory = $true, Position = 0)][string]$inputParam
     )
     $fileExtension = [System.IO.Path]::GetExtension($inputParam)
@@ -22,7 +22,7 @@ function tdl() {
 }
 
 function GetWebJSONData {
-    param ( 
+    param (
         [Parameter(Mandatory = $true, Position = 0)][string]$url
     )
     $ProgressPreference = 'SilentlyContinue'
@@ -31,7 +31,7 @@ function GetWebJSONData {
 }
 
 function dlSingleFile {
-    param ( 
+    param (
         [Parameter(Mandatory = $true, Position = 0)][string]$OriginURL
     )
     $StratPrefix = "https://telegra.ph"
@@ -43,7 +43,7 @@ function dlSingleFile {
     if (!(Test-Path $StorePath)) {
         New-Item -ItemType Directory -Path $StorePath -ErrorAction SilentlyContinue
     }
-    Write-Host "`nTelegraph Downloader`n" -BackgroundColor DarkGray 
+    Write-Host "`nTelegraph Downloader`n" -BackgroundColor DarkGray
     Write-Host `t"downloading: 🖼️  "$Title`n
     $ImagesInfo = @()
     $Images | ForEach-Object {
@@ -77,7 +77,7 @@ function dlSingleFile {
         }
         finally {
             try {
-                Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue                
+                Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
             }
             catch {
                 Write-Host "Current request is being used by another process" -ForegroundColor Red
@@ -88,7 +88,7 @@ function dlSingleFile {
 }
 
 function parserFile () {
-    param ( 
+    param (
         [Parameter(Mandatory = $true)][string]$filePath
     )
     $searchPattern = "telegra.ph/"
@@ -126,7 +126,7 @@ function parserFile () {
         $progress = [math]::Round($processedLines / $totalLines * 100, 2)
 
         # 打印处理进度
-        Write-Host "处理进度：$progress% ($processedLines / $totalLines)"
+        Write-Host "处理进度：$progress% ($processedLines / $totalLines)" -NoNewline
     }
 
     # 关闭流
@@ -144,7 +144,7 @@ function parserFile () {
 function dlPaseredFile {
     param (
         [Parameter(Mandatory = $true)][String]$PaserFile
-    ) 
+    )
     if ($PaserFile) {
         $absolutePath = Convert-Path -Path $PaserFile
         Write-Host $absolutePath
@@ -152,7 +152,7 @@ function dlPaseredFile {
     }
     else {
         Write-Host "Please enter the named `Result` json file path..." -ForegroundColor DarkCyan
-    } 
+    }
     if (Test-Path ".\searchResults.txt") {
         $URLS = (Get-Content -Path ".\searchResults.txt").Split("\n")
         $StratPrefix = "https://telegra.ph"
@@ -174,7 +174,7 @@ function dlPaseredFile {
                 New-Item -ItemType Directory -Path $StorePath -ErrorAction SilentlyContinue
 
             }
-            Write-Host "`nTelegraph Downloader`n" -BackgroundColor DarkGray 
+            Write-Host "`nTelegraph Downloader`n" -BackgroundColor DarkGray
             $ImagesInfo = @()
             $Images | ForEach-Object {
                 if ($_.tag -eq "figure") {
@@ -190,7 +190,7 @@ function dlPaseredFile {
                         Source      = "$StratPrefix$ImageUrl";
                         Destination = $imageFullPath
                     }
-                }   
+                }
             }
             $start_time = Get-Date
             $Global:throttleCount = 10
@@ -205,12 +205,12 @@ function dlPaseredFile {
                 }
                 finally {
                     try {
-                        Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue                
+                        Invoke-WebRequest -Uri $SourceURL -OutFile $Destination -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
                     }
                     catch {
                         Write-Host "Current request is being used by another process" -ForegroundColor Red
-                    }    
-                }   
+                    }
+                }
             } -ThrottleLimit $Global:throttleCount
             Write-Host "Download Completed in: $((Get-Date).Subtract($start_time).Seconds) Seconds" -ForegroundColor green
         }

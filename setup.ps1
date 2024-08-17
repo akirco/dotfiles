@@ -175,7 +175,7 @@ function lns {
     [string]$source,
     [string]$target
   )
-  New-Item -Path $source -ItemType SymbolicLink -Target $target -ErrorAction SilentlyContinue
+  New-Item -Path $source -ItemType SymbolicLink -Target $target -ErrorAction SilentlyContinue -Force
 }
 
 function lnj {
@@ -183,7 +183,7 @@ function lnj {
     [string]$source,
     [string]$target
   )
-  New-Item -Path $source -ItemType Junction -Target $target -ErrorAction SilentlyContinue
+  New-Item -Path $source -ItemType Junction -Target $target -ErrorAction SilentlyContinue -Force
 }
 
 
