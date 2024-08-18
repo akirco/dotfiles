@@ -1,4 +1,56 @@
 
+function lzd {
+  param (
+    [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
+  )
+  if (!$parentPath) {
+    $parentPath = $PWD.Path
+  }
+  Get-ChildItem $parentPath -Attributes Directory | Invoke-Fzf | Set-Location
+}
+function lfzd {
+  param (
+    [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
+  )
+  if (!$parentPath) {
+    $parentPath = $PWD.Path
+  }
+  Get-ChildItem $parentPath -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { lf $_ }
+}
+function vmf {
+  param (
+    [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
+  )
+  if (!$parentPath) {
+    $parentPath = $PWD.Path
+  }
+  Get-ChildItem $parentPath -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { nvim $_ }
+}
+function coded {
+  param (
+    [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
+  )
+  if (!$parentPath) {
+    $parentPath = $PWD.Path
+  }
+  Get-ChildItem $parentPath -Recurse -Attributes Directory | Where-Object { $_.PSIsContainer } | Invoke-Fzf |  ForEach-Object { code $_ -n }
+}
+function codef {
+  param (
+    [Parameter(Mandatory = $false, Position = 0)][string]$parentPath
+  )
+  if (!$parentPath) {
+    $parentPath = $PWD.Path
+  }
+  Get-ChildItem $parentPath -Recurse -Attributes !Directory | Invoke-Fzf | ForEach-Object { code $_ -r }
+}
+function vmfdf {
+  param (
+    [Parameter(Mandatory = $true, Position = 0)][string]$regxExp
+  )
+  fd.exe --glob $regxExp | Invoke-Fzf | ForEach-Object { nvim $_ }
+}
+
 function upload {
   param ([string]$file)
   $siteAddress = "https://file.io/?expires=1w"
