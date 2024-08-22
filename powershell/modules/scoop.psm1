@@ -192,6 +192,7 @@ function scoop {
   )
 
   $shims = Join-Path $root_path "shims\scoop.ps1"
+  $params = $($Args -join ' ')
 
 
   switch ($Command) {
@@ -201,15 +202,15 @@ function scoop {
         Invoke-Expression "$shims search"
       }
       else {
-        scoopSearch -searchTerm $Args
-        $Global:searchResult = searchRemote $Args
+        scoopSearch -searchTerm $params
+        $Global:searchResult = searchRemote -searchTerm $params
         $searchResult.value | Format-Table @{Label = "Remote Repository"; Expression = { $_.Metadata.Repository + ".git" } }, @{Label = "App"; Expression = { $_.Name } }, Version -AutoSize
       }
     }
     "add" {
       # Add the remote package to local
       if ($null -ne $Global:searchResult) {
-        scoopAdd $Args $Global:searchResult
+        scoopAdd $params $Global:searchResult
       }
       else {
         Write-Host "Please execute 'scoop search' command first to get the remote package list." -ForegroundColor Magenta
@@ -217,7 +218,7 @@ function scoop {
 
     }
     "dir" {
-      scoopDir -inputParam $Args
+      scoopDir -inputParam $params
     }
     "install" {
       foreach ($item in $Args) {
@@ -228,7 +229,7 @@ function scoop {
     default {
       # Execute the Scoop command with the given arguments
 
-      $commandLine = "$shims $Command $($Args -join ' ')"
+      $commandLine = "$shims $Command $params"
 
       Invoke-Expression $commandLine
     }
