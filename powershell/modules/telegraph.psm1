@@ -116,6 +116,13 @@ function parserFile () {
         # 在当前块中搜索模式
         $matchedLines = $block | Where-Object { $_ -match $searchPattern }
 
+
+        $matchedLines = $matchedLines.Trim().Split(": ")[1]
+
+        if ($matchedLines -match "telegra.ph/pass") {
+            continue
+        }
+
         # 将搜索结果添加到数组中
         $searchResults += $matchedLines
 
@@ -126,17 +133,21 @@ function parserFile () {
         $progress = [math]::Round($processedLines / $totalLines * 100, 2)
 
         # 打印处理进度
-        Write-Host "处理进度：$progress% ($processedLines / $totalLines)" -NoNewline
+        Write-Host "处理进度：$progress% ($processedLines / $totalLines)"
     }
 
     # 关闭流
     $streamReader.Close()
 
     # 将搜索结果保存到文件
-    $outputFilePath = ".\searchResults.txt"
+    $outputFilePath = "$env:USERPROFILE\Downloads\searchResults.txt"
     $searchResults | Out-File -FilePath $outputFilePath
     # 打印保存结果的文件路径
     Write-Host "搜索结果已保存到文件：$outputFilePath"
+    $isCountinue = Read-Host "download? (y/n)"
+    if (-not($isCountinue -eq "y")) {
+        break
+    }
 }
 
 

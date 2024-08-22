@@ -26,6 +26,8 @@ ${function:pic} = { Set-Location ~\Pictures }
 ${function:vod} = { Set-Location ~\Videos }
 ${function:song} = { Set-Location ~\Music }
 ${function:pros} = { Set-Location D:\projects }
+
+${function:qrr} = { qr.exe receive }
 # ---------------------------------- rm -rf ---------------------------------- #
 
 if (Test-Path Alias:rm) { Remove-Item Alias:rm }

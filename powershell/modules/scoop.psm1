@@ -188,9 +188,7 @@ $Global:searchResult = $null
 function scoop {
   param(
     [Parameter(Mandatory = $false, Position = 0)][string]$Command,
-    [Parameter(Mandatory = $false, Position = 1)][string]$Args,
-    [Parameter(Mandatory = $false, Position = 2)][string]$OptionArg1,
-    [Parameter(Mandatory = $false, Position = 3)][string]$OptionArg2
+    [Parameter(ValueFromRemainingArguments = $true)][string[]]$Args
   )
 
   $shims = Join-Path $root_path "shims\scoop.ps1"
@@ -199,9 +197,12 @@ function scoop {
   switch ($Command) {
     "search" {
       # Call our custom search function instead
-      scoopSearch -searchTerm $Args
-      $Global:searchResult = searchRemote $Args
-      $searchResult.value | Format-Table @{Label = "Remote Repository"; Expression = { $_.Metadata.Repository + ".git" } }, @{Label = "App"; Expression = { $_.Name } }, Version -AutoSize
+      if (-not ($Args -eq $null)) {
+        scoopSearch -searchTerm $Args
+        $Global:searchResult = searchRemote $Args
+        $searchResult.value | Format-Table @{Label = "Remote Repository"; Expression = { $_.Metadata.Repository + ".git" } }, @{Label = "App"; Expression = { $_.Name } }, Version -AutoSize
+      }
+      Invoke-Expression "$shims search"
     }
     "add" {
       # Add the remote package to local
@@ -216,10 +217,16 @@ function scoop {
     "dir" {
       scoopDir -inputParam $Args
     }
+    "install" {
+      foreach ($item in $Args) {
+        $commandLine = "$shims $Command $item"
+        Invoke-Expression $commandLine
+      }
+    }
     default {
       # Execute the Scoop command with the given arguments
 
-      $commandLine = "$shims $Command $Args $OptionArg1 $OptionArg2"
+      $commandLine = "$shims $Command $($Args -join ' ')"
 
       Invoke-Expression $commandLine
     }

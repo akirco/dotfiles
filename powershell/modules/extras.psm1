@@ -1,3 +1,32 @@
+function tr {
+  Param(
+    [Parameter(ValueFromPipeline = $true, Mandatory = $true)]
+    [string] $TargetString,
+    [Parameter(Mandatory = $true)]
+    [string] $FromString,
+    [Parameter(Mandatory = $true)]
+    [string] $ToString
+  )
+  begin {
+    $FromStringArray = @();
+    $FromStringBytes = [Text.Encoding]::UTF32.GetBytes($FromString);
+    for ($i = 0; $i -lt $FromStringBytes.length; $i += 4) {
+      $FromStringArray += [Text.Encoding]::UTF32.GetString($FromStringBytes, $i, 4);
+    }
+
+    $ToStringArray = @();
+    $ToStringBytes = [Text.Encoding]::UTF32.GetBytes($ToString);
+    for ($i = 0; $i -lt $ToStringBytes.length; $i += 4) {
+      $ToStringArray += [Text.Encoding]::UTF32.GetString($ToStringBytes, $i, 4);
+    }
+  }
+  process {
+    for ($i = 0; $i -lt $FromStringArray.Length -and $i -lt $ToStringArray.Length; $i++) {
+      $TargetString = $TargetString.Replace($FromStringArray[$i], $ToStringArray[$i]);
+    }
+    $TargetString
+  }
+}
 
 function lzd {
   param (

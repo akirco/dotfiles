@@ -28,6 +28,9 @@ Import-Module DirectoryPredictor
 Import-Module PSEverything
 
 $(Get-ChildItem -Path $ModulePath).FullName | ForEach-Object {
+    # if ($_.ToString().EndsWith("scoop.psm1")) {
+    #     return
+    # }
     Import-Module $_
 }
 
@@ -37,7 +40,7 @@ $(Get-ChildItem -Path $ModulePath).FullName | ForEach-Object {
 Set-PsFzfOption -PSReadlineChordProvider 'alt+s' -PSReadlineChordReverseHistory 'alt+h'
 
 # pass your override to PSFzf:
-$commandOverride = [ScriptBlock] { param($Location) z $Location }
+$commandOverride = [ScriptBlock] { param($Location) Write-Host $Location }
 Set-PsFzfOption -AltCCommand $commandOverride
 
 Set-PsFzfOption -EnableAliasFuzzyEdit
@@ -65,7 +68,8 @@ Set-PSReadLineOption -PredictionSource HistoryAndPlugin -HistoryNoDuplicates -Co
     ContinuationPrompt = '#ff8c00'
     Default            = '#12c768'
 }
-Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+
+(& s --completion powershell) | Out-String | Invoke-Expression
