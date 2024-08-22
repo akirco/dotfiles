@@ -197,12 +197,14 @@ function scoop {
   switch ($Command) {
     "search" {
       # Call our custom search function instead
-      if (-not ($Args -eq $null)) {
+      if ($Args -eq $null) {
+        Invoke-Expression "$shims search"
+      }
+      else {
         scoopSearch -searchTerm $Args
         $Global:searchResult = searchRemote $Args
         $searchResult.value | Format-Table @{Label = "Remote Repository"; Expression = { $_.Metadata.Repository + ".git" } }, @{Label = "App"; Expression = { $_.Name } }, Version -AutoSize
       }
-      Invoke-Expression "$shims search"
     }
     "add" {
       # Add the remote package to local
