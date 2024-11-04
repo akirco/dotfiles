@@ -112,7 +112,10 @@ Function Main() {
         }   
     }
 
-    New-Item -Path $PyEnvDir -ItemType Directory
+    if (-not (Test-Path -Path $PyEnvDir)) {
+        New-Item -Path $PyEnvDir -ItemType Directory
+    }
+
 
     $DownloadPath = "$PyEnvDir\pyenv-win.zip"
 
