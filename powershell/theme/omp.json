@@ -2,74 +2,74 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "blocks": [
     {
+      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#ffffff",
           "style": "plain",
-          "template": " <#24ffc0>\u276f</>",
+          "template": " <#24ffc0>❯</>",
+          "foreground": "#ffffff",
           "type": "text"
         },
         {
-          "type": "path",
-          "style": "plain",
-          "foreground": "#eb69ab",
           "properties": {
             "style": "folder"
           },
-          "template": " <b>{{ .Path }}</b>"
+          "style": "plain",
+          "template": " <b>{{ .Path }}</b>",
+          "foreground": "#eb69ab",
+          "type": "path"
         },
         {
-          "foreground": "#C678DD",
           "properties": {
+            "branch_icon": "\ue725 ",
             "fetch_stash_count": true,
-            "fetch_status": true,
-            "branch_icon": "\ue725 "
+            "fetch_status": true
           },
           "style": "plain",
-          "template": " <#7dcfff>\u26a1</>{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}",
+          "template": " <#7dcfff>⚡</>{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}",
+          "foreground": "#C678DD",
           "type": "git"
         },
         {
-          "type": "python",
           "style": "plain",
+          "template": " <#7dcfff>⚡</>(\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }})",
           "foreground": "#906cff",
-          "template": " <#7dcfff>\u26a1</>(\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }})"
+          "type": "python"
         },
         {
-          "foreground": "#98C379",
           "properties": {
             "fetch_version": true
           },
           "style": "plain",
-          "template": " <#7dcfff>\u26a1</>\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "template": " <#7dcfff>⚡</>\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "foreground": "#98C379",
           "type": "node"
         },
         {
-          "foreground": "#a277db",
           "properties": {
             "time_format": "15:04"
           },
           "style": "plain",
-          "template": " <#7dcfff>\u26a1</>\uf017 {{.CurrentDate | date .Format}}",
+          "template": " <#7dcfff>⚡</>\uf017 {{.CurrentDate | date .Format}}",
+          "foreground": "#a277db",
           "type": "time"
         },
         {
-          "foreground": "#C94A16",
           "style": "plain",
           "template": "x ",
+          "foreground": "#C94A16",
           "type": "status"
         },
         {
-          "foreground": "#ffffff",
           "style": "plain",
-          "template": " <#ffd483>\u276f</>",
+          "template": " <#ffd483>❯</>",
+          "foreground": "#ffffff",
           "type": "text"
         }
-      ],
-      "type": "prompt"
+      ]
     }
   ],
-  "final_space": true,
-  "version": 2
+  "version": 3,
+  "final_space": true
 }

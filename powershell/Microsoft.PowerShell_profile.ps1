@@ -13,11 +13,11 @@ catch {
     Enable-ExperimentalFeature -Name PSSubsystemPluginModel -WarningAction SilentlyContinue
 }
 # initial oh-my-posh themes
-oh-my-posh --init --shell pwsh --config $OMPThemesPath | Invoke-Expression
+# oh-my-posh --init --shell pwsh --config $OMPThemesPath | Invoke-Expression
+(@(& oh-my-posh.exe init pwsh --config=$OMPThemesPath --print) -join "`n") | Invoke-Expression
 
 Import-Module Terminal-Icons
 
-Import-Module PSWindowsUpdate
 
 Import-Module ZLocation
 
@@ -28,9 +28,6 @@ Import-Module DirectoryPredictor
 Import-Module PSEverything
 
 $(Get-ChildItem -Path $ModulePath).FullName | ForEach-Object {
-    # if ($_.ToString().EndsWith("scoop.psm1")) {
-    #     return
-    # }
     Import-Module $_
 }
 
