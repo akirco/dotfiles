@@ -1,16 +1,16 @@
 
 # global path
 # git clone https://github.com/akirco/dotfiles "$env:USERPROFILE\\documents\\dotfiles"
-$ModulePath = "$env:USERPROFILE\\.config\\dotfiles\\powershell\\modules"
+$ModulePath = "D:\\config\\powershell\\modules"
 $OMPThemesPath = "$ModulePath\\..\\theme\\omp.json"
 
 
 # Enable-ExperimentalFeature PSSubsystem
 try {
-    Get-PSSubsystem -Kind CommandPredictor | Out-Null
+  Get-PSSubsystem -Kind CommandPredictor | Out-Null
 }
 catch {
-    Enable-ExperimentalFeature -Name PSSubsystemPluginModel -WarningAction SilentlyContinue
+  Enable-ExperimentalFeature -Name PSSubsystemPluginModel -WarningAction SilentlyContinue
 }
 # initial oh-my-posh themes
 # oh-my-posh --init --shell pwsh --config $OMPThemesPath | Invoke-Expression
@@ -28,7 +28,7 @@ Import-Module DirectoryPredictor
 Import-Module PSEverything
 
 $(Get-ChildItem -Path $ModulePath).FullName | ForEach-Object {
-    Import-Module $_
+  Import-Module $_
 }
 
 
@@ -55,15 +55,15 @@ Enable-PoshTooltips
 Enable-PoshTransientPrompt
 Set-PSReadlineOption -ShowToolTip -PredictionViewStyle ListView -HistoryNoDuplicates -WarningAction SilentlyContinue
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin -HistoryNoDuplicates -Colors @{
-    Command            = '#21acff'
-    Number             = '#c678dd'
-    Member             = '#e43535'
-    Operator           = '#f6ad55'
-    Type               = '#6262ea'
-    Variable           = '#21c68b'
-    Parameter          = '#e9967a'
-    ContinuationPrompt = '#ff8c00'
-    Default            = '#12c768'
+  Command            = '#21acff'
+  Number             = '#c678dd'
+  Member             = '#e43535'
+  Operator           = '#f6ad55'
+  Type               = '#6262ea'
+  Variable           = '#21c68b'
+  Parameter          = '#e9967a'
+  ContinuationPrompt = '#ff8c00'
+  Default            = '#12c768'
 }
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward

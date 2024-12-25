@@ -113,7 +113,10 @@ scoop bucket add aki 'https://github.com/akirco/aki-apps.git'
 ```powershell
 # link profile
 
-New-Item -Path $PROFILE.AllUsersCurrentHost -ItemType SymbolicLink -Target $env:USERPROFILE\.config\dotfiles\powershell\Microsoft.PowerShell_profile.ps1 -Force
+cd d: && git clone https://github.com/akirco/dotfiles.git config
+
+
+New-Item -Path $PROFILE.AllUsersCurrentHost -ItemType SymbolicLink -Target D:\config\powershell\Microsoft.PowerShell_profile.ps1 -Force
 ```
 
 
