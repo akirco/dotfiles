@@ -1,6 +1,5 @@
 # alias
 Set-Alias ll lsd.exe
-Set-Alias la lsd.exe -a
 Set-Alias which where.exe
 Set-Alias c cls
 Set-Alias t trash
