@@ -1,6 +1,7 @@
 # alias
 Set-Alias ll lsd.exe
-Set-Alias sco scoop
+Set-Alias la lsd.exe -a
+Set-Alias which where.exe
 Set-Alias c cls
 Set-Alias t trash
 Set-Alias mpx mpxplay
@@ -28,6 +29,7 @@ ${function:song} = { Set-Location ~\Music }
 ${function:pros} = { Set-Location D:\projects }
 
 ${function:qrr} = { qr.exe receive }
+${function:qrs} = { qr.exe send }
 # ---------------------------------- rm -rf ---------------------------------- #
 
 if (Test-Path Alias:rm) { Remove-Item Alias:rm }
