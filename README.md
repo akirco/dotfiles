@@ -69,6 +69,7 @@ scoop alias add rm 'scoop uninstall $args[0]' "uninstall app"
 scoop alias add up 'scoop update $args[0]' "update app or itself"
 scoop alias add rma 'scoop cleanup *' "remove old version"
 scoop alias add rmc 'scoop cache rm *' "remove dowloaded file"
+scoop alias add dir 'start $(scoop prefix $args[0])' "open app directory"
 ```
 
 - app bucket
