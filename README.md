@@ -80,7 +80,7 @@ scoop bucket add aki 'https://github.com/akirco/aki-apps.git'
 
 - app backup
 
-> scoop import [apps.json](https://github.com/akirco/dotfiles/docs/blob/master/apps.json)
+> scoop import [apps.json](https://github.com/akirco/dotfiles/blob/master/docs/apps.json)
 
 ## terminal settings
 
