@@ -1,8 +1,9 @@
 
 # global path
 # git clone https://github.com/akirco/dotfiles "$env:USERPROFILE\\documents\\dotfiles"
-$ModulePath = "D:\\config\\powershell\\modules"
-$OMPThemesPath = "$ModulePath\\..\\theme\\omp.json"
+
+$ModulePath = "E:\\config\\powershell\\modules"
+$OMPThemesPath = "$ModulePath\\..\\theme\\tokyonight_storm.omp.json"
 
 
 # Enable-ExperimentalFeature PSSubsystem
@@ -13,11 +14,11 @@ catch {
   Enable-ExperimentalFeature -Name PSSubsystemPluginModel -WarningAction SilentlyContinue
 }
 # initial oh-my-posh themes
-# oh-my-posh --init --shell pwsh --config $OMPThemesPath | Invoke-Expression
-(@(& oh-my-posh.exe init pwsh --config=$OMPThemesPath --print) -join "`n") | Invoke-Expression
+oh-my-posh.exe --init --shell pwsh --config $OMPThemesPath | Invoke-Expression
+# (@(& oh-my-posh.exe init pwsh --config=$OMPThemesPath --print) -join "") | Invoke-Expression
+
 
 Import-Module Terminal-Icons
-
 
 Import-Module ZLocation
 
@@ -26,6 +27,8 @@ Import-Module CompletionPredictor
 Import-Module DirectoryPredictor
 
 Import-Module PSEverything
+
+Import-Module PSFzf
 
 $(Get-ChildItem -Path $ModulePath).FullName | ForEach-Object {
   Import-Module $_
@@ -38,6 +41,7 @@ Set-PsFzfOption -PSReadlineChordProvider 'alt+s' -PSReadlineChordReverseHistory 
 
 # pass your override to PSFzf:
 $commandOverride = [ScriptBlock] { param($Location) Write-Host $Location }
+
 Set-PsFzfOption -AltCCommand $commandOverride
 
 Set-PsFzfOption -EnableAliasFuzzyEdit
